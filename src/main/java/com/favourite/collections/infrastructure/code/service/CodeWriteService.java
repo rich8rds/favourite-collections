@@ -1,0 +1,9 @@
+package com.favourite.collections.infrastructure.code.service;
+
+import com.favourite.collections.infrastructure.code.data.CodeData;
+import com.favourite.collections.infrastructure.core.data.CommandResult;
+import org.springframework.http.ResponseEntity;
+
+public interface CodeWriteService {
+    ResponseEntity<CommandResult> createCode(CodeData codeData);
+}
