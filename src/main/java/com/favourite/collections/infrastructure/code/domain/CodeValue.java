@@ -2,6 +2,7 @@
 package com.favourite.collections.infrastructure.code.domain;
 
 import com.favourite.collections.infrastructure.core.domain.AbstractPersistableCustom;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,11 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "t_code_value", uniqueConstraints = {
 		@UniqueConstraint(columnNames = {"code_id", "code_value"}, name = "code_value_duplicate")})
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class CodeValue extends AbstractPersistableCustom {
 
 	@Column(name = "code_value", length = 100)

@@ -17,9 +17,9 @@ import lombok.ToString;
 public class CodeValueData extends AbstractPersistableCustom {
 
 	private String label;
-	private int position;
+	private Integer position;
 	private String description;
 	private String codeId;
-	private boolean isActive;
-	private boolean mandatory;
+	private Boolean isActive;
+	private Boolean mandatory;
 }

@@ -22,7 +22,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class CodeReadServiceImpl implements CodeReadService {
+public class CodeValueReadServiceImpl implements CodeReadService {
     private final CodeRepository codeRepository;
     private final CodeModelMapper codeMapper;
 

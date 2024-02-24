@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CodeValueRepository extends JpaRepository<CodeValue, Long> {
+    boolean existsByName(String name);
 }

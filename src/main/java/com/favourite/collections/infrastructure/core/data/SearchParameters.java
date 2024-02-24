@@ -16,6 +16,7 @@ import lombok.ToString;
 @ToString
 public class SearchParameters {
 	private Long id;
+	private Boolean showCodeValues;
 	private String name;
 	private Integer offset;
 	private Integer limit;
