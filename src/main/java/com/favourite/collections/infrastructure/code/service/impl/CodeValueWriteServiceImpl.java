@@ -1,8 +1,6 @@
 package com.favourite.collections.infrastructure.code.service.impl;
 
-import com.favourite.collections.infrastructure.code.data.CodeData;
 import com.favourite.collections.infrastructure.code.data.CodeValueData;
-import com.favourite.collections.infrastructure.code.domain.Code;
 import com.favourite.collections.infrastructure.code.domain.CodeValue;
 import com.favourite.collections.infrastructure.code.repository.CodeValueRepository;
 import com.favourite.collections.infrastructure.code.service.CodeValueWriteService;
@@ -23,13 +21,13 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class CodeValueWriteServiceImpl implements CodeValueWriteService {
     private final CodeValueRepository codeValueRepository;
-    private final CodeModelMapper codeModelMapper;
+    private CodeModelMapper codeModelMapper = new CodeModelMapper();
 
     @Override
     public ResponseEntity<CommandResult> createCodeValue(CodeValueData codeValueData) {
         String name = codeValueData.getLabel();
 
-        if(codeValueRepository.existsByName(name)){
+        if(codeValueRepository.existsByLabel(name)){
             throw new AbstractPlatformException("error.msg.code.exists", "Code Data name already exists", 409);
         }
         CodeValue codeValue = this.codeValueRepository.saveAndFlush(codeModelMapper.fromCodeValueDataToCodeValue(codeValueData));

@@ -1,6 +1,5 @@
 package com.favourite.collections.infrastructure.code.api;
 
-import com.favourite.collections.infrastructure.code.data.CodeData;
 import com.favourite.collections.infrastructure.code.data.CodeValueData;
 import com.favourite.collections.infrastructure.code.service.CodeValueReadService;
 import com.favourite.collections.infrastructure.code.service.CodeValueWriteService;
@@ -36,7 +35,7 @@ public class CodeValueController {
     }
 
     @GetMapping
-    public Page<CodeData> getRoles(@RequestParam(required = false) Long id,
+    public Page<CodeValueData> getRoles(@RequestParam(required = false) Long id,
                                    @RequestParam(required = false) String name,
                                    @RequestParam(defaultValue = "1") Integer offset,
                                    @RequestParam(defaultValue = "10") Integer limit,
@@ -52,7 +51,7 @@ public class CodeValueController {
     }
 
     @GetMapping("/{codeValueId}")
-    public ResponseEntity<CodeData> retrieveOneCode(@PathVariable Long codeValueId) {
+    public ResponseEntity<CodeValueData> retrieveOneCode(@PathVariable Long codeValueId) {
         return codeReadService.retrieveOneCodeValue(codeValueId);
     }
 

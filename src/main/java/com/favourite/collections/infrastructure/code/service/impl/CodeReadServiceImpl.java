@@ -9,6 +9,7 @@ import com.favourite.collections.infrastructure.core.data.SearchParameters;
 import com.favourite.collections.infrastructure.core.exceptions.AbstractPlatformException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -24,7 +25,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CodeReadServiceImpl implements CodeReadService {
     private final CodeRepository codeRepository;
-    private final CodeModelMapper codeMapper;
+    private final CodeModelMapper codeMapper = new CodeModelMapper();
 
     @Override
     public Page<CodeData> retrieveAllCodes(SearchParameters searchParameters) {

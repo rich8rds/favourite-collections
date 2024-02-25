@@ -24,7 +24,7 @@ import java.util.Map;
 public class CodeWriteServiceImpl implements CodeWriteService {
     private final CodeRepository codeRepository;
     private final CodeValueRepository codeValueRepository;
-    private final CodeModelMapper codeModelMapper;
+    private final CodeModelMapper codeModelMapper = new CodeModelMapper();
 
     @Override
     public ResponseEntity<CommandResult> createCode(CodeData codeData) {
