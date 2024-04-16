@@ -56,7 +56,7 @@ public class AuthServiceImpl implements AuthService {
 	private final RoleRepository roleRepository;
 	private final TokenRepository tokenRepository;
 	private final PasswordEncoder passwordEncoder;
-	private final AppContextUser appContextUser = new AppContextUser();
+	private final AppContextUser appContextUser;
 	private final MessagesTemplate messagesTemplate = new MessagesTemplate();
 	private final TokenGenerator tokenGenerator;
 	private final EmailService emailService;

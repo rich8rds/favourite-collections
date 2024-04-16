@@ -9,7 +9,6 @@ import com.favourite.collections.infrastructure.core.data.SearchParameters;
 import com.favourite.collections.infrastructure.core.exceptions.AbstractPlatformException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;

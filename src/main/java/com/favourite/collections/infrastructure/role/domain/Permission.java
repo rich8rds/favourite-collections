@@ -17,7 +17,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "t_permission")
+@Table(name = "m_permission")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

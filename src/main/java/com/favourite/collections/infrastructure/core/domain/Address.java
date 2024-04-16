@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "t_address")
+@Table(name = "m_address")
 public class Address extends AbstractPersistableCustom {
 
 	@Column(name = "street_number")

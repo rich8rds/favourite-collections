@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "t_code_value", uniqueConstraints = {
+@Table(name = "m_code_value", uniqueConstraints = {
 		@UniqueConstraint(columnNames = {"code_id", "code_value"}, name = "code_value_duplicate")})
 @Builder
 @NoArgsConstructor

@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @Builder
 @Entity
-@Table(name = "t_product")
+@Table(name = "m_product")
 public class Product extends AbstractAuditableCustom {
 	@Column(name = "name", unique = true)
 	private String name;
