@@ -1,10 +1,12 @@
+/* RICHARDS AND FAVOUR (C)2024 */
 package com.favourite.collections.portfolio.cart.service;
-
-import com.favourite.collections.portfolio.cart.domain.CartItem;
-import org.springframework.http.ResponseEntity;
 
 import java.util.Set;
 
+import org.springframework.http.ResponseEntity;
+
+import com.favourite.collections.portfolio.cart.domain.CartItem;
+
 public interface CartReadService {
-    ResponseEntity<Set<CartItem>> viewCartItems();
+	ResponseEntity<Set<CartItem>> viewCartItems();
 }

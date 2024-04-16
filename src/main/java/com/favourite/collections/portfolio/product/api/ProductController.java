@@ -29,14 +29,13 @@ public class ProductController {
 
 	@GetMapping
 	public ResponseEntity<Page<ProductData>> retrieveAllProducts(@RequestParam(required = false) Long id,
-															 @RequestParam(required = false) String name,
-			@RequestParam(defaultValue = "1") Integer offset, @RequestParam(defaultValue = "10") Integer limit,
-			@RequestParam(defaultValue = "DESC") String sortOrder, @RequestParam(defaultValue = "id") String orderBy,
+			@RequestParam(required = false) String name, @RequestParam(defaultValue = "1") Integer offset,
+			@RequestParam(defaultValue = "10") Integer limit, @RequestParam(defaultValue = "DESC") String sortOrder,
+			@RequestParam(defaultValue = "id") String orderBy,
 			@RequestParam(name = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
 			@RequestParam(name = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
 
-		SearchParameters searchParameters = SearchParameters.builder().id(id).offset(offset).limit(limit)
-				.name(name)
+		SearchParameters searchParameters = SearchParameters.builder().id(id).offset(offset).limit(limit).name(name)
 				.sortOrder(sortOrder).orderBy(orderBy).startDate(startDate).endDate(endDate).build();
 
 		return productReadService.retrieveAllProducts(searchParameters);

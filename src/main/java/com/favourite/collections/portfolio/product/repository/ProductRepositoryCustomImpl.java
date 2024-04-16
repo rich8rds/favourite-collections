@@ -12,8 +12,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import com.favourite.collections.portfolio.product.data.ProductData;
-import com.favourite.collections.portfolio.product.util.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -21,7 +19,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import com.favourite.collections.infrastructure.core.data.SearchParameters;
+import com.favourite.collections.portfolio.product.data.ProductData;
 import com.favourite.collections.portfolio.product.domain.Product;
+import com.favourite.collections.portfolio.product.util.ModelMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +36,7 @@ public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
 
 	@Override
 	public Page<ProductData> findBy(SearchParameters searchParameters) {
-		//log.info("SEARCH_PARAMETERS: {}", searchParameters);
+		// log.info("SEARCH_PARAMETERS: {}", searchParameters);
 		Long id = searchParameters.getId();
 		Integer limit = searchParameters.getLimit();
 

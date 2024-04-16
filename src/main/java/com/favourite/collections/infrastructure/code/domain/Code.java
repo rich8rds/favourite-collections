@@ -1,9 +1,6 @@
 /* RICHARDS AND FAVOUR (C)2024 */
 package com.favourite.collections.infrastructure.code.domain;
 
-import com.favourite.collections.infrastructure.core.domain.AbstractPersistableCustom;
-import lombok.*;
-
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +9,10 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import com.favourite.collections.infrastructure.core.domain.AbstractPersistableCustom;
+
+import lombok.*;
 
 @Entity
 @Table(name = "m_code", uniqueConstraints = {@UniqueConstraint(columnNames = {"code_name"}, name = "code_name")})

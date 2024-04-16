@@ -1,15 +1,16 @@
 /* RICHARDS AND FAVOUR (C)2024 */
 package com.favourite.collections.infrastructure.code.domain;
 
-import com.favourite.collections.infrastructure.core.domain.AbstractPersistableCustom;
-import lombok.*;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import com.favourite.collections.infrastructure.core.domain.AbstractPersistableCustom;
+
+import lombok.*;
 
 @Entity
 @Table(name = "m_code_value", uniqueConstraints = {

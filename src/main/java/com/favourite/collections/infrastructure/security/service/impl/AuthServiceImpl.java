@@ -18,11 +18,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.favourite.collections.infrastructure.core.data.CommandResult;
+import com.favourite.collections.infrastructure.core.data.CommandResultBuilder;
 import com.favourite.collections.infrastructure.core.domain.AppUser;
 import com.favourite.collections.infrastructure.core.exceptions.AbstractPlatformException;
 import com.favourite.collections.infrastructure.core.repository.AppUserRepository;
-import com.favourite.collections.infrastructure.core.data.CommandResult;
-import com.favourite.collections.infrastructure.core.data.CommandResultBuilder;
 import com.favourite.collections.infrastructure.mail.data.EmailRequestData;
 import com.favourite.collections.infrastructure.mail.exceptions.UserUnAuthorizedException;
 import com.favourite.collections.infrastructure.mail.service.EmailService;

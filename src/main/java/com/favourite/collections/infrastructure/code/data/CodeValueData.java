@@ -2,12 +2,12 @@
 package com.favourite.collections.infrastructure.code.data;
 
 import com.favourite.collections.infrastructure.core.domain.AbstractPersistableCustom;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
 
 @Data
 @AllArgsConstructor

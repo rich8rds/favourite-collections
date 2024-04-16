@@ -9,6 +9,7 @@ import javax.persistence.Table;
 import com.favourite.collections.infrastructure.core.domain.AbstractAuditableCustom;
 import com.favourite.collections.infrastructure.core.domain.AppUser;
 import com.favourite.collections.portfolio.cart.domain.Cart;
+
 import lombok.*;
 
 @Entity
@@ -20,12 +21,11 @@ import lombok.*;
 @Builder
 @ToString
 public class Customer extends AbstractAuditableCustom {
-    @OneToOne
-    @JoinColumn(name = "app_user_id")
-    private AppUser appUser;
+	@OneToOne
+	@JoinColumn(name = "app_user_id")
+	private AppUser appUser;
 
-    @OneToOne
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
-
+	@OneToOne
+	@JoinColumn(name = "cart_id")
+	private Cart cart;
 }

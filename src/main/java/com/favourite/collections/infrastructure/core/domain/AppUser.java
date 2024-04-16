@@ -12,8 +12,8 @@ import javax.validation.constraints.NotNull;
 
 import com.favourite.collections.infrastructure.code.domain.CodeValue;
 import com.favourite.collections.infrastructure.role.domain.Role;
-
 import com.favourite.collections.portfolio.cart.domain.Cart;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -55,12 +55,12 @@ public class AppUser extends AbstractAuditableCustom {
 	@JoinColumn(name = "role_id")
 	private Role role;
 
-	 @OneToOne(fetch = FetchType.EAGER)
-	 @JoinColumn(name = "cart_id")
-	 private Cart cart = new Cart();
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "cart_id")
+	private Cart cart = new Cart();
 
 	public Cart getCart() {
-		if(cart == null) {
+		if (cart == null) {
 			this.cart = new Cart();
 		}
 		return this.cart;
