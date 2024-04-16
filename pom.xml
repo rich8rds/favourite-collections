@@ -156,7 +156,7 @@
             <removeUnusedImports></removeUnusedImports>
             <formatAnnotations></formatAnnotations>
             <licenseHeader>
-              <content>/* RICHARDS AND FAVOUR (C)$YEAR */</content>
+              <content>/* Richards-Favour #$YEAR */</content>
               <!-- or <file>${project.basedir}/license-header</file> -->
             </licenseHeader>
           </java>

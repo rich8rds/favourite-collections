@@ -1,4 +1,4 @@
-/* RICHARDS AND FAVOUR (C)2024 */
+/* Richards-Favour #2024 */
 package com.favourite.collections.infrastructure.core.data;
 
 import java.time.LocalDateTime;
@@ -22,6 +22,8 @@ public class SearchParameters {
 	private Integer limit;
 	private String sortOrder;
 	private String orderBy;
+	private String category;
+	private String subcategory;
 	private LocalDateTime startDate;
 	private LocalDateTime endDate;
 }

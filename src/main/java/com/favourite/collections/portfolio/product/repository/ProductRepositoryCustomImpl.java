@@ -1,4 +1,4 @@
-/* RICHARDS AND FAVOUR (C)2024 */
+/* Richards-Favour #2024 */
 package com.favourite.collections.portfolio.product.repository;
 
 import java.time.LocalDateTime;
@@ -18,8 +18,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
+import com.favourite.collections.infrastructure.code.domain.CodeValue;
+import com.favourite.collections.infrastructure.code.repository.CodeValueRepository;
 import com.favourite.collections.infrastructure.core.data.SearchParameters;
-import com.favourite.collections.portfolio.product.data.ProductData;
+import com.favourite.collections.infrastructure.core.exceptions.AbstractPlatformException;
+import com.favourite.collections.portfolio.product.data.ProductFetchData;
 import com.favourite.collections.portfolio.product.domain.Product;
 import com.favourite.collections.portfolio.product.util.ModelMapper;
 
@@ -32,15 +35,19 @@ import lombok.extern.slf4j.Slf4j;
 public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
 	@PersistenceContext
 	private final EntityManager em;
+
+	private final CodeValueRepository codeValueRepository;
 	private final ModelMapper modelMapper = new ModelMapper();
 
 	@Override
-	public Page<ProductData> findBy(SearchParameters searchParameters) {
+	public Page<ProductFetchData> findBy(SearchParameters searchParameters) {
 		// log.info("SEARCH_PARAMETERS: {}", searchParameters);
 		Long id = searchParameters.getId();
 		Integer limit = searchParameters.getLimit();
 
 		String name = searchParameters.getName();
+		// String category = searchParameters.getCategory();
+		String subcategory = searchParameters.getSubcategory();
 		Integer offset = searchParameters.getOffset();
 		String sortOrder = searchParameters.getSortOrder();
 		String orderBy = searchParameters.getOrderBy();
@@ -65,6 +72,13 @@ public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
 			predicates.add(cb.equal(nxConnectDBroot.get("name"), name));
 		}
 
+		if (subcategory != null) {
+			CodeValue codeValue = this.codeValueRepository.findCodeValueByLabel(name)
+					.orElseThrow(() -> new AbstractPlatformException("error.code.value.id.not.found",
+							"Code value with identifier " + name + "does not exist", 404));
+			predicates.add(cb.equal(nxConnectDBroot.get("subcategory"), codeValue));
+		}
+
 		if (requestEndDate != null && requestStartDate != null) {
 			predicates.add(cb.between(nxConnectDBroot.get("created_date"), requestStartDate, requestEndDate));
 		}
@@ -73,12 +87,12 @@ public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
 		TypedQuery<Product> typedQuery = em.createQuery(cq);
 
 		List<Product> result = typedQuery.getResultList();
-		List<ProductData> dataResults = result.stream().map(modelMapper::fromProductToData).toList();
+		List<ProductFetchData> dataResults = result.stream().map(modelMapper::fromProductToData).toList();
 
 		log.info("RESULT: {}", dataResults);
 		final int start = (int) pageRequest.getOffset();
 		final int end = Math.min((start + pageRequest.getPageSize()), result.size());
-		final Page<ProductData> page = new PageImpl<>(dataResults.subList(start, end), pageRequest, result.size());
+		final Page<ProductFetchData> page = new PageImpl<>(dataResults.subList(start, end), pageRequest, result.size());
 		return page;
 	}
 }

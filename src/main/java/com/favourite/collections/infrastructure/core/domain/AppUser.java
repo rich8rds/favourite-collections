@@ -1,4 +1,4 @@
-/* RICHARDS AND FAVOUR (C)2024 */
+/* Richards-Favour #2024 */
 package com.favourite.collections.infrastructure.core.domain;
 
 import javax.persistence.Column;
@@ -42,14 +42,14 @@ public class AppUser extends AbstractAuditableCustom {
 	@Column(nullable = false)
 	private String password;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "gender_id", nullable = true)
-	private CodeValue gender;
-
 	private String dateOfBirth;
 	private String phoneNo;
 	private Boolean isVerified = false;
 	private Boolean isActive = false;
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "gender_id", nullable = true)
+	private CodeValue gender;
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "role_id")

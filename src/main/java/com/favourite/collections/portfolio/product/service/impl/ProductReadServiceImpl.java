@@ -1,4 +1,4 @@
-/* RICHARDS AND FAVOUR (C)2024 */
+/* Richards-Favour #2024 */
 package com.favourite.collections.portfolio.product.service.impl;
 
 import org.springframework.data.domain.Page;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.favourite.collections.infrastructure.core.data.CommandResult;
 import com.favourite.collections.infrastructure.core.data.SearchParameters;
-import com.favourite.collections.portfolio.product.data.ProductData;
+import com.favourite.collections.portfolio.product.data.ProductFetchData;
 import com.favourite.collections.portfolio.product.repository.ProductRepository;
 import com.favourite.collections.portfolio.product.service.ProductReadService;
 
@@ -21,7 +21,7 @@ public class ProductReadServiceImpl implements ProductReadService {
 	private final ProductRepository productRepository;
 
 	@Override
-	public ResponseEntity<Page<ProductData>> retrieveAllProducts(SearchParameters searchParameters) {
+	public ResponseEntity<Page<ProductFetchData>> retrieveAllProducts(SearchParameters searchParameters) {
 		return ResponseEntity.ok().body(productRepository.findBy(searchParameters));
 	}
 
