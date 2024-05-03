@@ -1,4 +1,4 @@
-/* Richards-Favour #2024 */
+/* Collections #2024 */
 package com.favourite.collections.infrastructure.security.config;
 
 import java.util.HashMap;
@@ -19,7 +19,7 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
 
 @Configuration
-public class OpenApiConfig {
+public class SwaggerConfig {
 
 	@Value("${favourite.openapi.dev-url}")
 	private String devUrl;

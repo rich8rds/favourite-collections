@@ -1,4 +1,4 @@
-/* Richards-Favour #2024 */
+/* Collections #2024 */
 package com.favourite.collections.infrastructure.security.tokens;
 
 import org.springframework.security.core.Authentication;

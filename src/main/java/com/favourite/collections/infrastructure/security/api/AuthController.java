@@ -1,4 +1,4 @@
-/* Richards-Favour #2024 */
+/* Collections #2024 */
 package com.favourite.collections.infrastructure.security.api;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +37,7 @@ public class AuthController {
 	}
 
 	@PostMapping("register")
-	public ResponseEntity<CommandResult> login(@RequestBody @Valid RegistrationData registerData,
+	public ResponseEntity<CommandResult> register(@RequestBody @Valid RegistrationData registerData,
 			HttpServletRequest request) {
 		if (!registerData.passwordsMatch()) {
 			throw new ConstraintValidationException("error.auth.passwords.do.not.match", "Passwords do not match");

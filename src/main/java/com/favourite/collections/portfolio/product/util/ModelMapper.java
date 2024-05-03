@@ -1,7 +1,7 @@
-/* Richards-Favour #2024 */
+/* Collections #2024 */
 package com.favourite.collections.portfolio.product.util;
 
-import com.favourite.collections.portfolio.product.data.ProductCreateData;
+import com.favourite.collections.portfolio.product.data.ProductRequestData;
 import com.favourite.collections.portfolio.product.data.ProductFetchData;
 import com.favourite.collections.portfolio.product.domain.Product;
 
@@ -13,7 +13,7 @@ public class ModelMapper {
 				.subcategoryId(product.getSubcategory()).build();
 	}
 
-	public Product fromDataToProduct(ProductCreateData product) {
+	public Product fromDataToProduct(ProductRequestData product) {
 		return Product.builder().name(product.getName()).description(product.getDescription())
 				.imageUrl(product.getImageUrl()).availableQuantity(product.getAvailableQuantity())
 				.unitPrice(product.getUnitPrice()).build();

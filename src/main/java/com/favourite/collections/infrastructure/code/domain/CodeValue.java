@@ -1,4 +1,4 @@
-/* Richards-Favour #2024 */
+/* Collections #2024 */
 package com.favourite.collections.infrastructure.code.domain;
 
 import javax.persistence.Column;

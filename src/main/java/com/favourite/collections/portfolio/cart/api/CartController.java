@@ -1,4 +1,4 @@
-/* Richards-Favour #2024 */
+/* Collections #2024 */
 package com.favourite.collections.portfolio.cart.api;
 
 import java.util.Set;
@@ -18,9 +18,11 @@ import com.favourite.collections.portfolio.cart.domain.CartItem;
 import com.favourite.collections.portfolio.cart.service.CartReadService;
 import com.favourite.collections.portfolio.cart.service.CartWriteService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+@Tag(name = "Cart")
 @Slf4j
 @RestController
 @RequestMapping("/api/v1/carts")

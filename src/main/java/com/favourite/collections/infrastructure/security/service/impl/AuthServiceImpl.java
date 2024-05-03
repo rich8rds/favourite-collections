@@ -1,4 +1,4 @@
-/* Richards-Favour #2024 */
+/* Collections #2024 */
 package com.favourite.collections.infrastructure.security.service.impl;
 
 import java.time.Instant;
@@ -196,8 +196,7 @@ public class AuthServiceImpl implements AuthService {
 
 	@Override
 	public ResponseEntity<CommandResult> updatePassword(UpdatePasswordData updatePasswordData) {
-		String email = this.appContextUser.extractEmailFromPrincipal()
-				.orElseThrow(() -> new UsernameNotFoundException("User Does Not Exist"));
+		String email = this.appContextUser.authenticated().getEmail();
 
 		String oldPassword = updatePasswordData.getOldPassword();
 		String newPassword = updatePasswordData.getNewPassword();

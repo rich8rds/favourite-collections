@@ -1,4 +1,4 @@
-/* Richards-Favour #2024 */
+/* Collections #2024 */
 package com.favourite.collections.infrastructure.mail.utils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MessagesTemplate {
 	public String welcomeMessageTemplate(AppUser appUser, String token, HttpServletRequest request) {
 		String message = "<html> " + "<body>" + "<h5>Hi " + appUser.getFirstname() + " " + appUser.getLastname()
-				+ ",<h5> <br>" + "<p>Thank you for your interest in joining Top Restaurant."
+				+ ",</h5> <br>" + "<p>Thank you for your interest in joining Top Restaurant."
 				+ "To complete your registration, we need you to verify your email address \n"
 				+ "<br><a href=[[TOKEN_URL]]>CLICK TO VERIFY YOUR ACCOUNT. </a><p>" + "</body> " + "</html>";
 
@@ -23,7 +23,7 @@ public class MessagesTemplate {
 
 	public String resendTokenTemplate(AppUser appUser, String token, HttpServletRequest request) {
 		String message = "<html> " + "<body>" + "<h5>Hi " + appUser.getFirstname() + " " + appUser.getLastname()
-				+ ",<h5> <br>" + "<p>Thank you for your interest in joining Top Restaurant."
+				+ ",</h5> <br>" + "<p>Thank you for your interest in joining Top Restaurant."
 				+ "<br><a href=[[TOKEN_URL]]>CLICK TO VERIFY YOUR ACCOUNT. </a><p>" + "</body> " + "</html>";
 
 		String url = getApplicationUrl(request) + "verify-registration?token=" + token;

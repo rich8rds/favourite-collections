@@ -1,4 +1,4 @@
-/* Richards-Favour #2024 */
+/* Collections #2024 */
 package com.favourite.collections.infrastructure.code.util;
 
 import com.favourite.collections.infrastructure.code.data.CodeData;
