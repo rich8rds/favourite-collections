@@ -3,7 +3,7 @@ package com.favourite.collections.infrastructure.core.service;
 
 public enum ResponseCodeEnum {
 	BAD_REQUEST(400, "BAD_REQUEST"), PROCESSING(1, "PROCESSING"), EXCEPTION(2, "EXCEPTION"), USER_NOT_FOUND(404,
-			"User could not be found."), INVALID_TOKEN(400, "This is an invalid token.");
+			"User could not be found."), INVALID_TOKEN(400, "This is an invalid token."), ROLE_ALREADY_EXISTS(409, "Role already exists."),;
 
 	private final Integer code;
 	private final String value;

@@ -4,6 +4,7 @@ package com.favourite.collections.infrastructure.role.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.favourite.collections.infrastructure.core.service.ResponseCodeEnum;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -39,10 +40,14 @@ public class RoleServiceImpl implements RoleService {
 		String description = roleRequest.getDescription();
 		boolean isDisabled = roleRequest.getIsDisabled();
 
+		if(this.roleRepository.existsByName(name)) {
+			throw new AbstractPlatformException("error.role.already.exists", ResponseCodeEnum.ROLE_ALREADY_EXISTS);
+		}
+
 		Role role = Role.builder().name(name).description(description).isDisabled(isDisabled).build();
-		roleRepository.saveAndFlush(role);
+		this.roleRepository.saveAndFlush(role);
 		return ResponseEntity.status(201)
-				.body(new CommandResultBuilder().message("Role with '" + name + "' created!").build());
+				.body(new CommandResultBuilder().resourceId(String.valueOf(role.getId())).message("Role with '" + name + "' created!").build());
 	}
 
 	@Override
