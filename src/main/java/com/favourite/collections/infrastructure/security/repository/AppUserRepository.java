@@ -1,5 +1,5 @@
 /* Collections #2024 */
-package com.favourite.collections.infrastructure.core.repository;
+package com.favourite.collections.infrastructure.security.repository;
 
 import java.util.Optional;
 

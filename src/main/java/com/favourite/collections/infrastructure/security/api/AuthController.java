@@ -45,12 +45,6 @@ public class AuthController {
 		return authService.register(registerData, request);
 	}
 
-	// todo: verify email GET
-
-	// todo: reset-password-link send link to user to click GET
-	// todo: change-password accept input to change password POST
-	// todo: update-password: after user has logged in POST
-
 	@GetMapping("verify-registration")
 	public ResponseEntity<CommandResult> verifyAccount(@RequestParam String token) {
 		return authService.verifyUserVerificationToken(token);

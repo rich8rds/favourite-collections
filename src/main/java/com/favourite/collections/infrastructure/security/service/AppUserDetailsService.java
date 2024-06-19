@@ -1,5 +1,5 @@
 /* Collections #2024 */
-package com.favourite.collections.infrastructure.core.service;
+package com.favourite.collections.infrastructure.security.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.favourite.collections.infrastructure.core.data.AppUserDetails;
 import com.favourite.collections.infrastructure.core.domain.AppUser;
-import com.favourite.collections.infrastructure.core.repository.AppUserRepository;
+import com.favourite.collections.infrastructure.security.repository.AppUserRepository;
 
 import lombok.RequiredArgsConstructor;
 

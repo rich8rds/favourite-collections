@@ -2,9 +2,13 @@
 package com.favourite.collections.infrastructure.core.exceptions;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.favourite.collections.infrastructure.core.data.ApiSubError;
+import com.favourite.collections.infrastructure.core.service.ResponseCodeEnum;
 
 import lombok.Getter;
 
@@ -15,13 +19,25 @@ public class AbstractPlatformException extends RuntimeException {
 	private final String globalisationMessageCode;
 	private final String defaultUserMessage;
 	private final Object[] defaultUserMessageArgs;
-	private Integer statusCode;
+	private final Integer statusCode;
+	private final Collection<ApiSubError> subErrors;
+
+	public AbstractPlatformException(String globalisationMessageCode, ResponseCodeEnum responseCodeEnum) {
+		super(responseCodeEnum.getValue());
+		this.globalisationMessageCode = globalisationMessageCode;
+		this.defaultUserMessage = null;
+		this.defaultUserMessageArgs = NO_ARGS;
+		this.statusCode = responseCodeEnum.getCode();
+		this.subErrors = Collections.emptyList();
+	}
 
 	public AbstractPlatformException(String globalisationMessageCode, String defaultUserMessage) {
 		super(defaultUserMessage);
 		this.globalisationMessageCode = globalisationMessageCode;
 		this.defaultUserMessage = defaultUserMessage;
 		this.defaultUserMessageArgs = NO_ARGS;
+		this.statusCode = null;
+		this.subErrors = Collections.emptyList();
 	}
 
 	protected AbstractPlatformException(String globalisationMessageCode, String defaultUserMessage, Throwable cause) {
@@ -29,6 +45,8 @@ public class AbstractPlatformException extends RuntimeException {
 		this.globalisationMessageCode = globalisationMessageCode;
 		this.defaultUserMessage = defaultUserMessage;
 		this.defaultUserMessageArgs = NO_ARGS;
+		this.statusCode = null;
+		this.subErrors = Collections.emptyList();
 	}
 
 	protected AbstractPlatformException(String globalisationMessageCode, String defaultUserMessage,
@@ -37,6 +55,8 @@ public class AbstractPlatformException extends RuntimeException {
 		this.globalisationMessageCode = globalisationMessageCode;
 		this.defaultUserMessage = defaultUserMessage;
 		this.defaultUserMessageArgs = AbstractPlatformException.filterThrowableCause(defaultUserMessageArgs);
+		this.statusCode = null;
+		this.subErrors = Collections.emptyList();
 	}
 
 	public AbstractPlatformException(String globalisationMessageCode, String defaultUserMessage, Integer statusCode) {
@@ -44,6 +64,16 @@ public class AbstractPlatformException extends RuntimeException {
 		this.defaultUserMessage = defaultUserMessage;
 		this.statusCode = statusCode;
 		this.defaultUserMessageArgs = null;
+		this.subErrors = Collections.emptyList();
+	}
+
+	public AbstractPlatformException(String globalisationMessageCode, String defaultUserMessage, Integer statusCode,
+			Collection<ApiSubError> subErrors) {
+		this.globalisationMessageCode = globalisationMessageCode;
+		this.defaultUserMessage = defaultUserMessage;
+		this.statusCode = statusCode;
+		this.defaultUserMessageArgs = null;
+		this.subErrors = subErrors;
 	}
 
 	private static Throwable findThrowableCause(Object[] defaultUserMessageArgs) {

@@ -1,8 +1,8 @@
 /* Collections #2024 */
 package com.favourite.collections.portfolio.product.util;
 
-import com.favourite.collections.portfolio.product.data.ProductRequestData;
 import com.favourite.collections.portfolio.product.data.ProductFetchData;
+import com.favourite.collections.portfolio.product.data.ProductRequestData;
 import com.favourite.collections.portfolio.product.domain.Product;
 
 public class ModelMapper {

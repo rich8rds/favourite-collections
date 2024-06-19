@@ -2,7 +2,6 @@
 package com.favourite.collections.infrastructure.core.exceptions;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -29,7 +28,8 @@ public class GlobalExceptionHandler {
 			errors.add(new ApiValidationError(fieldName, errorMessage));
 		});
 
-		ApiError errorResponse = ApiError.builder().message("Error found!").subErrors(errors).build();
+		ApiError errorResponse = ApiError.builder().message("Error found!").debugMessage("error.validation.on.field")
+				.subErrors(errors).build();
 		return ResponseEntity.status(400).body(errorResponse);
 	}
 
@@ -38,7 +38,7 @@ public class GlobalExceptionHandler {
 
 		ApiError errorResponse = ApiError.builder().message(ex.getDefaultUserMessage())
 				.globalMessageCode(ex.getGlobalisationMessageCode()).debugMessage(ex.getLocalizedMessage())
-				.subErrors(Collections.EMPTY_LIST).build();
+				.subErrors(ex.getSubErrors()).build();
 
 		return ResponseEntity.badRequest().body(errorResponse);
 	}
@@ -49,7 +49,7 @@ public class GlobalExceptionHandler {
 
 		ApiError errorResponse = ApiError.builder().message(ex.getDefaultUserMessage())
 				.globalMessageCode(ex.getGlobalisationMessageCode()).debugMessage(ex.getLocalizedMessage())
-				.subErrors(Collections.EMPTY_LIST).build();
+				.subErrors(ex.getSubErrors()).build();
 
 		return ResponseEntity.badRequest().body(errorResponse);
 	}

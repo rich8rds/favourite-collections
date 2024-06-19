@@ -22,7 +22,6 @@ import com.favourite.collections.infrastructure.core.data.CommandResult;
 import com.favourite.collections.infrastructure.core.data.CommandResultBuilder;
 import com.favourite.collections.infrastructure.core.domain.AppUser;
 import com.favourite.collections.infrastructure.core.exceptions.AbstractPlatformException;
-import com.favourite.collections.infrastructure.core.repository.AppUserRepository;
 import com.favourite.collections.infrastructure.mail.data.EmailRequestData;
 import com.favourite.collections.infrastructure.mail.exceptions.UserUnAuthorizedException;
 import com.favourite.collections.infrastructure.mail.service.EmailService;
@@ -36,10 +35,11 @@ import com.favourite.collections.infrastructure.security.data.RegistrationData;
 import com.favourite.collections.infrastructure.security.data.UpdatePasswordData;
 import com.favourite.collections.infrastructure.security.domain.Token;
 import com.favourite.collections.infrastructure.security.exception.ConstraintValidationException;
+import com.favourite.collections.infrastructure.security.repository.AppUserRepository;
 import com.favourite.collections.infrastructure.security.repository.TokenRepository;
 import com.favourite.collections.infrastructure.security.service.AuthService;
-import com.favourite.collections.infrastructure.security.tokens.JwtTokenService;
 import com.favourite.collections.infrastructure.security.util.AppContextUser;
+import com.favourite.collections.infrastructure.security.util.JwtUtil;
 import com.favourite.collections.infrastructure.security.util.TokenGenerator;
 
 import lombok.RequiredArgsConstructor;
@@ -51,7 +51,7 @@ import lombok.extern.slf4j.Slf4j;
 public class AuthServiceImpl implements AuthService {
 	private final UserDetailsService userDetailsService;
 	private final AuthenticationManager authenticationManager;
-	private final JwtTokenService jwtTokenService;
+	private final JwtUtil jwtUtil;
 	private final AppUserRepository appUserRepository;
 	private final RoleRepository roleRepository;
 	private final TokenRepository tokenRepository;
@@ -81,7 +81,7 @@ public class AuthServiceImpl implements AuthService {
 				throw new AbstractPlatformException("error.msg.invalid.email.or.password",
 						"Email or Password Invalid!");
 			} else {
-				String token = this.jwtTokenService.generateToken(authentication);
+				String token = this.jwtUtil.generateToken(authentication);
 				return ResponseEntity.ok(new CommandResultBuilder().response("Login Successful").resourceId("200L")
 						.token(token).build());
 			}
@@ -89,7 +89,7 @@ public class AuthServiceImpl implements AuthService {
 		} catch (BadCredentialsException e) {
 			throw new UserUnAuthorizedException("error.msg.auth.login", e.getMessage(), 401);
 		} catch (UsernameNotFoundException e) {
-			throw new AbstractPlatformException("error.msg.login", e.getMessage(), 404);
+			throw new AbstractPlatformException("error.msg.auth.login", e.getMessage(), 404);
 		}
 	}
 

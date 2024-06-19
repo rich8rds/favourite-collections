@@ -1,15 +1,15 @@
 /* Collections #2024 */
 package com.favourite.collections.portfolio.product.service.impl;
 
-import com.favourite.collections.infrastructure.core.domain.AppUser;
-import com.favourite.collections.infrastructure.security.util.AppContextUser;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.favourite.collections.infrastructure.code.domain.CodeValue;
 import com.favourite.collections.infrastructure.code.repository.CodeValueRepository;
 import com.favourite.collections.infrastructure.core.data.CommandResult;
+import com.favourite.collections.infrastructure.core.domain.AppUser;
 import com.favourite.collections.infrastructure.core.exceptions.AbstractPlatformException;
+import com.favourite.collections.infrastructure.security.util.AppContextUser;
 import com.favourite.collections.portfolio.product.data.ProductRequestData;
 import com.favourite.collections.portfolio.product.domain.Product;
 import com.favourite.collections.portfolio.product.repository.ProductRepository;

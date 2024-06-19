@@ -6,17 +6,6 @@ import java.time.LocalDateTime;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-
-import com.favourite.collections.infrastructure.core.data.CommandResult;
-import com.favourite.collections.infrastructure.core.data.SearchParameters;
-import com.favourite.collections.portfolio.product.data.ProductRequestData;
-import com.favourite.collections.portfolio.product.data.ProductFetchData;
-import com.favourite.collections.portfolio.product.service.ProductReadService;
-import com.favourite.collections.portfolio.product.service.ProductWriteService;
-
-import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +14,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.favourite.collections.infrastructure.core.data.CommandResult;
+import com.favourite.collections.infrastructure.core.data.SearchParameters;
+import com.favourite.collections.portfolio.product.data.ProductFetchData;
+import com.favourite.collections.portfolio.product.data.ProductRequestData;
+import com.favourite.collections.portfolio.product.service.ProductReadService;
+import com.favourite.collections.portfolio.product.service.ProductWriteService;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Tag(name = "Products")
 @Slf4j
@@ -62,7 +62,8 @@ public class ProductController {
 	}
 
 	@PutMapping("/productId")
-	public ResponseEntity<CommandResult> updateProduct(@PathVariable Long productId, @RequestBody ProductRequestData productRequestData) {
+	public ResponseEntity<CommandResult> updateProduct(@PathVariable Long productId,
+			@RequestBody ProductRequestData productRequestData) {
 		return this.productWriteService.updateProduct(productId, productRequestData);
 	}
 }

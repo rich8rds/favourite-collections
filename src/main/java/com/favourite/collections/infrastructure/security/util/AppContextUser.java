@@ -7,7 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.favourite.collections.infrastructure.core.domain.AppUser;
 import com.favourite.collections.infrastructure.core.exceptions.AbstractPlatformException;
-import com.favourite.collections.infrastructure.core.repository.AppUserRepository;
+import com.favourite.collections.infrastructure.security.repository.AppUserRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
