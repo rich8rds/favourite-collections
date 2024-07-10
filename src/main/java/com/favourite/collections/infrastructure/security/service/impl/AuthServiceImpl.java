@@ -22,8 +22,10 @@ import com.favourite.collections.infrastructure.core.data.CommandResult;
 import com.favourite.collections.infrastructure.core.data.CommandResultBuilder;
 import com.favourite.collections.infrastructure.core.domain.AppUser;
 import com.favourite.collections.infrastructure.core.exceptions.AbstractPlatformException;
+import com.favourite.collections.infrastructure.core.json.FromJsonHelper;
 import com.favourite.collections.infrastructure.mail.data.EmailRequestData;
 import com.favourite.collections.infrastructure.mail.exceptions.UserUnAuthorizedException;
+import com.favourite.collections.infrastructure.mail.rabbitmq.RabbitMqNotification;
 import com.favourite.collections.infrastructure.mail.service.EmailService;
 import com.favourite.collections.infrastructure.mail.utils.MessagesTemplate;
 import com.favourite.collections.infrastructure.role.domain.Role;
@@ -60,6 +62,8 @@ public class AuthServiceImpl implements AuthService {
 	private final MessagesTemplate messagesTemplate = new MessagesTemplate();
 	private final TokenGenerator tokenGenerator;
 	private final EmailService emailService;
+	private final RabbitMqNotification rabbitMqNotification;
+	private final FromJsonHelper fromJsonHelper;
 
 	@Override
 	public ResponseEntity<CommandResult> loginUserIn(LoginData loginData) {
@@ -118,10 +122,11 @@ public class AuthServiceImpl implements AuthService {
 		AppUser newAppuser = AppUser.builder().email(email).firstname(firstname).lastname(lastname).phoneNo(phoneNumber)
 				.password(passwordEncoder.encode(password)).role(role).build();
 
-		newAppuser = appUserRepository.save(newAppuser);
+		newAppuser = this.appUserRepository.save(newAppuser);
 
-		Token token = tokenGenerator.generateToken(300L, ChronoUnit.SECONDS, newAppuser.getId());
-		tokenRepository.save(token);
+		log.info("AppuserId: {}", newAppuser.getId());
+		Token token = tokenGenerator.generateToken(5L, ChronoUnit.MINUTES, newAppuser.getId());
+		this.tokenRepository.save(token);
 
 		// todo: sendEmail To user
 		String messageBody = messagesTemplate.welcomeMessageTemplate(newAppuser, token.getToken(), request);
@@ -130,7 +135,8 @@ public class AuthServiceImpl implements AuthService {
 				.from("noreply@favourite-collections.ng").subject("WELCOME TO FAVOURITE COLLECTIONS").body(messageBody)
 				.build();
 
-		emailService.sendEmail(emailRequestData);
+		this.rabbitMqNotification.sendNotification(this.fromJsonHelper.toJson(emailRequestData));
+		// this.emailService.sendEmail(emailRequestData);
 		return ResponseEntity.ok(new CommandResultBuilder().entityId(newAppuser.getId())
 				.response("Registration Successful").message("Check your email to get verified").build());
 	}
@@ -154,7 +160,7 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	private Token getToken(String token) {
-		Token verificationToken = tokenRepository.findByToken(token)
+		Token verificationToken = this.tokenRepository.findByToken(token)
 				.orElseThrow(() -> new AbstractPlatformException("error.msg.auth.token.not.found", "Token Not Found"));
 
 		long expirationTime = verificationToken.getExpirationTime();

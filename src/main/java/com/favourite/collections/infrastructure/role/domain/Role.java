@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.favourite.collections.infrastructure.core.domain.AbstractAuditableCustom;
 
 import lombok.AllArgsConstructor;
@@ -26,6 +27,7 @@ import lombok.ToString;
 @Setter
 @Builder
 @ToString
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Role extends AbstractAuditableCustom {
 	@Column(name = "name", unique = true)
 	private String name;

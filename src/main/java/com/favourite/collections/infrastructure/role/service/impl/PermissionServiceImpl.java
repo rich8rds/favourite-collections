@@ -40,7 +40,7 @@ public class PermissionServiceImpl implements PermissionService {
 		String displayName = actionName + "_" + entityName;
 
 		if (permissionRepository.existsByDisplayName(displayName))
-			throw new IllegalArgumentException("Permission already exists");
+			throw new AbstractPlatformException("error.permission.already.exists", "Permission already exists");
 
 		Permission permission = Permission.builder().grouping(grouping).actionName(actionName).entityName(entityName)
 				.displayName(displayName).description(description).isDisabled(isDisabled).build();
@@ -64,13 +64,17 @@ public class PermissionServiceImpl implements PermissionService {
 		Map<String, Object> changes = new HashMap<>();
 
 		if (grouping != null) {
+			if (!is(grouping, permission.getGrouping())) {
+				changes.put("grouping", grouping);
+			}
 			permission.setGrouping(grouping);
-			changes.put("grouping", grouping);
 		}
 
 		if (actionName != null) {
-			permission.setGrouping(actionName);
-			changes.put("actionName", actionName);
+			if (!is(actionName, permission.getActionName())) {
+				changes.put("actionName", actionName);
+			}
+			permission.setActionName(actionName);
 		}
 
 		if (entityName != null) {
@@ -78,23 +82,34 @@ public class PermissionServiceImpl implements PermissionService {
 			if (permissionRepository.existsByDisplayName(displayName)) {
 				throw new AbstractPlatformException("Permission already exists!", "Create a unique entityName!");
 			}
-			permission.setGrouping(entityName);
-			changes.put("entityName", entityName);
+			if (!is(entityName, permission.getEntityName())) {
+				changes.put("entityName", entityName);
+			}
+			permission.setEntityName(entityName);
 		}
 
 		if (description != null) {
+			log.info("isEqual: {}", is(description, permission.getDescription()));
+			if (!is(description, permission.getDescription())) {
+				changes.put("description", description);
+			}
 			permission.setDescription(description);
-			changes.put("description", description);
 		}
 
 		if (isDisabled != null) {
+			if (isDisabled != permission.getIsDisabled()) {
+				changes.put("isDisabled", isDisabled);
+			}
 			permission.setIsDisabled(isDisabled);
-			changes.put("isDisabled", isDisabled);
 		}
 
-		permissionRepository.saveAndFlush(permission);
-		return ResponseEntity.status(200).body(new CommandResultBuilder()
+		this.permissionRepository.saveAndFlush(permission);
+		return ResponseEntity.status(200).body(new CommandResultBuilder().entityId(permissionId)
 				.message("Permission with '" + grouping + "' updated!").changes(changes).build());
+	}
+
+	private boolean is(String value, String comparison) {
+		return value.equals(comparison);
 	}
 
 	@Override

@@ -9,12 +9,14 @@ import org.springframework.http.HttpStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
 @Builder
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@AllArgsConstructor
 public final class ApiError {
 
 	private final HttpStatus status;
@@ -26,4 +28,12 @@ public final class ApiError {
 	private final String globalMessageCode;
 	private final String debugMessage;
 	private final Collection<ApiSubError> subErrors;
+
+	public ApiError(String message, Collection<ApiSubError> subErrors) {
+		this.message = message;
+		this.subErrors = subErrors;
+		this.globalMessageCode = null;
+		this.debugMessage = null;
+		this.status = HttpStatus.BAD_REQUEST;
+	}
 }

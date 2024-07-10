@@ -1,18 +1,22 @@
 /* Collections #2024 */
 package com.favourite.collections.infrastructure.mail.data;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class EmailRequestData {
+@ToString
+public class EmailRequestData implements Serializable {
 	private String from;
 	private String to;
 	private String subject;

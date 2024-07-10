@@ -31,7 +31,7 @@ public class RoleController {
 
 	@GetMapping
 	public ResponseEntity<?> getAllRoles() {
-		return roleService.getAllRoles();
+		return this.roleService.getAllRoles();
 	}
 
 	@PostMapping

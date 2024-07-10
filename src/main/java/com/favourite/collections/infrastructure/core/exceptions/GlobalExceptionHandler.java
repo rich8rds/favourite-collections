@@ -38,7 +38,7 @@ public class GlobalExceptionHandler {
 
 		ApiError errorResponse = ApiError.builder().message(ex.getDefaultUserMessage())
 				.globalMessageCode(ex.getGlobalisationMessageCode()).debugMessage(ex.getLocalizedMessage())
-				.subErrors(ex.getSubErrors()).build();
+				.subErrors(ex.getApiErrors()).build();
 
 		return ResponseEntity.badRequest().body(errorResponse);
 	}
@@ -49,7 +49,7 @@ public class GlobalExceptionHandler {
 
 		ApiError errorResponse = ApiError.builder().message(ex.getDefaultUserMessage())
 				.globalMessageCode(ex.getGlobalisationMessageCode()).debugMessage(ex.getLocalizedMessage())
-				.subErrors(ex.getSubErrors()).build();
+				.subErrors(ex.getApiErrors()).build();
 
 		return ResponseEntity.badRequest().body(errorResponse);
 	}

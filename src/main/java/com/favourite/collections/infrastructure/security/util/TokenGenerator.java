@@ -11,12 +11,10 @@ import com.favourite.collections.infrastructure.security.domain.Token;
 
 @Component
 public class TokenGenerator {
-	public Token generateToken(Long time, ChronoUnit timeType, Long appUserId) {
+	public Token generateToken(Long time, ChronoUnit chronoUnit, Long appUserId) {
 		String genToken = UUID.randomUUID().toString();
 
-		Token token = Token.builder().token(genToken).startTime((System.currentTimeMillis() * 1000))
-				.expirationTime(Instant.now().plus(time, timeType).getEpochSecond()).appUserId(appUserId).build();
-
-		return token;
+		return Token.builder().token(genToken).startTime((System.currentTimeMillis() * 1000))
+				.expirationTime(Instant.now().plus(time, chronoUnit).getEpochSecond()).appUserId(appUserId).build();
 	}
 }

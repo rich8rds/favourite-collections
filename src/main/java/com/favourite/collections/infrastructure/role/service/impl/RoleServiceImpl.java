@@ -4,13 +4,13 @@ package com.favourite.collections.infrastructure.role.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.favourite.collections.infrastructure.core.service.ResponseCodeEnum;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.favourite.collections.infrastructure.core.data.CommandResult;
 import com.favourite.collections.infrastructure.core.data.CommandResultBuilder;
 import com.favourite.collections.infrastructure.core.exceptions.AbstractPlatformException;
+import com.favourite.collections.infrastructure.core.service.ResponseCodeEnum;
 import com.favourite.collections.infrastructure.role.data.RolePermissionRequest;
 import com.favourite.collections.infrastructure.role.data.RoleRequest;
 import com.favourite.collections.infrastructure.role.domain.Permission;
@@ -40,14 +40,14 @@ public class RoleServiceImpl implements RoleService {
 		String description = roleRequest.getDescription();
 		boolean isDisabled = roleRequest.getIsDisabled();
 
-		if(this.roleRepository.existsByName(name)) {
+		if (this.roleRepository.existsByName(name)) {
 			throw new AbstractPlatformException("error.role.already.exists", ResponseCodeEnum.ROLE_ALREADY_EXISTS);
 		}
 
 		Role role = Role.builder().name(name).description(description).isDisabled(isDisabled).build();
 		this.roleRepository.saveAndFlush(role);
-		return ResponseEntity.status(201)
-				.body(new CommandResultBuilder().resourceId(String.valueOf(role.getId())).message("Role with '" + name + "' created!").build());
+		return ResponseEntity.status(201).body(new CommandResultBuilder().resourceId(String.valueOf(role.getId()))
+				.message("Role with '" + name + "' created!").build());
 	}
 
 	@Override
@@ -70,8 +70,10 @@ public class RoleServiceImpl implements RoleService {
 		if (role == null && roleId != null) {
 			role = roleRepository.findById(roleId).orElse(null);
 		}
-		if (role == null)
+
+		if (role == null) {
 			throw new IllegalArgumentException("Role with name " + roleName + " does not exist");
+		}
 
 		Permission permission = null;
 		if (permissionName != null) {
@@ -80,16 +82,19 @@ public class RoleServiceImpl implements RoleService {
 		if (permission == null && permissionId != null) {
 			permission = permissionRepository.findById(permissionId).orElse(null);
 		}
-		if (permission == null)
+		if (permission == null) {
 			throw new IllegalArgumentException("Permission does not exist");
+		}
 
 		role.getPermissions().add(permission);
-		roleRepository.save(role);
+		this.roleRepository.save(role);
 
-		return ResponseEntity.status(200).body(new CommandResultBuilder().resourceId(String.valueOf(roleId))
-				.entityId(permission.getId()).message("Invalid role name")
-				.response("Role with name '" + roleName + "' has permission with name '" + permissionName + "' added.")
-				.build());
+		return ResponseEntity
+				.status(200).body(
+						new CommandResultBuilder().resourceId(String.valueOf(roleId)).entityId(permission.getId())
+								.message("Invalid role name").response("Role with name '" + role.getName()
+										+ "' has permission with name '" + permission.getDisplayName() + "' added.")
+								.build());
 	}
 
 	@Override
@@ -104,23 +109,34 @@ public class RoleServiceImpl implements RoleService {
 
 		Map<String, Object> changes = new HashMap<>();
 		if (name != null) {
+			if (is(name, role.getName())) {
+				changes.put("name", name);
+			}
 			role.setName(name);
-			changes.put("name", name);
 		}
 
 		if (description != null) {
+			log.info("description: {}", is(description, role.getDescription()));
+			if (is(description, role.getDescription())) {
+				changes.put("description", description);
+			}
 			role.setDescription(description);
-			changes.put("description", description);
 		}
 
 		if (isDisabled != null) {
+			if (isDisabled != role.getIsDisabled()) {
+				changes.put("isDisabled", isDisabled);
+			}
 			role.setIsDisabled(isDisabled);
-			changes.put("isDisabled", isDisabled);
 		}
 
 		roleRepository.saveAndFlush(role);
 		return ResponseEntity.status(200)
 				.body(new CommandResultBuilder().message("Role with '" + name + "' created!").changes(changes).build());
+	}
+
+	private boolean is(String value, String comparison) {
+		return !value.equals(comparison);
 	}
 
 	@Override
