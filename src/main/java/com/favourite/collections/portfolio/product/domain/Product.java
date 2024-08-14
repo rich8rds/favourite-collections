@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.favourite.collections.infrastructure.code.domain.CodeValue;
+import com.favourite.collections.infrastructure.useradmin.domain.CodeValue;
 import com.favourite.collections.infrastructure.core.domain.AbstractAuditableCustom;
 
 import lombok.AllArgsConstructor;

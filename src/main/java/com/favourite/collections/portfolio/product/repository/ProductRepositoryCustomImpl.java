@@ -18,8 +18,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
-import com.favourite.collections.infrastructure.code.domain.CodeValue;
-import com.favourite.collections.infrastructure.code.repository.CodeValueRepository;
+import com.favourite.collections.infrastructure.useradmin.domain.CodeValue;
+import com.favourite.collections.infrastructure.useradmin.repository.CodeValueRepository;
 import com.favourite.collections.infrastructure.core.data.SearchParameters;
 import com.favourite.collections.infrastructure.core.exceptions.AbstractPlatformException;
 import com.favourite.collections.portfolio.product.data.ProductFetchData;

@@ -1,3 +1,8 @@
+
+CREATE DATABASE favourite_collections;
+DROP DATABASE favourite_collections;
+
+
 INSERT INTO t_role(name, description, is_disabled) VALUES('CUSTOMER', 'This is the role for customer', false);
 INSERT INTO t_role(name, description, is_disabled) VALUES('ADMIN', 'This is the role for admin', false);
 

@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.favourite.collections.infrastructure.core.data.CommandResult;
 import com.favourite.collections.infrastructure.core.data.CommandResultBuilder;
-import com.favourite.collections.infrastructure.core.domain.AppUser;
+import com.favourite.collections.infrastructure.useradmin.domain.AppUser;
 import com.favourite.collections.infrastructure.core.exceptions.AbstractPlatformException;
-import com.favourite.collections.infrastructure.security.repository.AppUserRepository;
-import com.favourite.collections.infrastructure.security.util.AppContextUser;
+import com.favourite.collections.infrastructure.useradmin.repository.AppUserRepository;
+import com.favourite.collections.infrastructure.useradmin.util.AppContextUser;
 import com.favourite.collections.portfolio.cart.domain.Cart;
 import com.favourite.collections.portfolio.cart.domain.CartItem;
 import com.favourite.collections.portfolio.cart.repository.CartItemRepository;

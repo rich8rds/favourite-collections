@@ -13,6 +13,7 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.favourite.collections.infrastructure.useradmin.domain.AppUser;
 import org.springframework.data.domain.Auditable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;

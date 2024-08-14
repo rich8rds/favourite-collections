@@ -2,6 +2,7 @@
 package com.favourite.collections.portfolio.cart.domain;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,9 +27,11 @@ import lombok.ToString;
 @Builder
 @ToString
 public class Cart extends AbstractPersistableCustom {
-	@OneToMany
-	private Set<CartItem> items;
 
-	@Column(name = "total")
+	@OneToMany
+	private Set<CartItem> items = new HashSet<>();
+
+	@Column(name = "total", scale = 2)
 	private BigDecimal total = BigDecimal.ZERO;
+
 }

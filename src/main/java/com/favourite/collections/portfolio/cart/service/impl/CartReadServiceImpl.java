@@ -6,9 +6,9 @@ import java.util.Set;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.favourite.collections.infrastructure.core.domain.AppUser;
+import com.favourite.collections.infrastructure.useradmin.domain.AppUser;
 import com.favourite.collections.infrastructure.core.exceptions.AbstractPlatformException;
-import com.favourite.collections.infrastructure.security.util.AppContextUser;
+import com.favourite.collections.infrastructure.useradmin.util.AppContextUser;
 import com.favourite.collections.portfolio.cart.domain.Cart;
 import com.favourite.collections.portfolio.cart.domain.CartItem;
 import com.favourite.collections.portfolio.cart.service.CartReadService;

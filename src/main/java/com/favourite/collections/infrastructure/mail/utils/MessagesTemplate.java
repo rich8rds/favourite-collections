@@ -3,7 +3,7 @@ package com.favourite.collections.infrastructure.mail.utils;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.favourite.collections.infrastructure.core.domain.AppUser;
+import com.favourite.collections.infrastructure.useradmin.domain.AppUser;
 
 import lombok.extern.slf4j.Slf4j;
 

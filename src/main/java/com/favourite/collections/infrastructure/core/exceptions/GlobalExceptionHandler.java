@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.favourite.collections.infrastructure.core.data.ApiError;
 import com.favourite.collections.infrastructure.core.data.ApiSubError;
 import com.favourite.collections.infrastructure.core.data.ApiValidationError;
-import com.favourite.collections.infrastructure.security.exception.ConstraintValidationException;
+import com.favourite.collections.infrastructure.useradmin.exception.ConstraintValidationException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {

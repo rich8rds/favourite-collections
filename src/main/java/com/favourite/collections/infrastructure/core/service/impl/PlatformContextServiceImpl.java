@@ -7,7 +7,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.favourite.collections.infrastructure.core.domain.AppUser;
+import com.favourite.collections.infrastructure.useradmin.domain.AppUser;
 import com.favourite.collections.infrastructure.core.exceptions.AbstractPlatformException;
 import com.favourite.collections.infrastructure.core.service.PlatformContextService;
 

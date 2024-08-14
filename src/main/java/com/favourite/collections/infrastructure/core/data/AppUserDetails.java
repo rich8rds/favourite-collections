@@ -6,7 +6,7 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.favourite.collections.infrastructure.core.domain.AppUser;
+import com.favourite.collections.infrastructure.useradmin.domain.AppUser;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,8 +25,7 @@ public class AppUserDetails implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
-		// return appUser.getRole().getGrantedAuthorities();
+		 return appUser.getRole().getPermissions();
 	}
 
 	@Override
