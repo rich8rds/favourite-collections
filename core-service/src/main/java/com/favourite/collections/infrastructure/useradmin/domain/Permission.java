@@ -5,7 +5,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
-import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.GrantedAuthority;
 
 import com.favourite.collections.infrastructure.core.domain.AbstractAuditableCustom;
 
@@ -24,7 +24,7 @@ import lombok.ToString;
 @Setter
 @Builder
 @ToString
-public class Permission extends AbstractAuditableCustom implements GrantedAuthority {
+public class Permission extends AbstractAuditableCustom {// implements GrantedAuthority {
 	@Column(name = "grouping")
 	private String grouping;
 
@@ -43,8 +43,8 @@ public class Permission extends AbstractAuditableCustom implements GrantedAuthor
 	@Column(name = "is_disabled")
 	private Boolean isDisabled;
 
-	@Override
-	public String getAuthority() {
-		return this.displayName;
-	}
+//	@Override
+//	public String getAuthority() {
+//		return this.displayName;
+//	}
 }

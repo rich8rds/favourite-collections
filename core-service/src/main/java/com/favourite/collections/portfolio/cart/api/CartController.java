@@ -31,6 +31,11 @@ public class CartController {
 	private final CartWriteService cartWriteService;
 	private final CartReadService cartReadService;
 
+	@GetMapping("test")
+	public String test() {
+		return "Test successful";
+	}
+
 	@PostMapping("/item/{productId}")
 	public ResponseEntity<CommandResult> addProductToCart(@PathVariable Long productId) {
 		return cartWriteService.addProductToCart(productId);

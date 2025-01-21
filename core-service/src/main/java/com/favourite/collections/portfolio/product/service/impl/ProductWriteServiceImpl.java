@@ -9,7 +9,7 @@ import com.favourite.collections.infrastructure.core.exceptions.AbstractPlatform
 import com.favourite.collections.infrastructure.useradmin.domain.AppUser;
 import com.favourite.collections.infrastructure.useradmin.domain.CodeValue;
 import com.favourite.collections.infrastructure.useradmin.repository.CodeValueRepository;
-import com.favourite.collections.infrastructure.useradmin.util.AppContextUser;
+//import com.favourite.collections.infrastructure.useradmin.util.AppContextUser;
 import com.favourite.collections.portfolio.product.data.ProductRequestData;
 import com.favourite.collections.portfolio.product.domain.Product;
 import com.favourite.collections.portfolio.product.repository.ProductRepository;
@@ -26,11 +26,11 @@ public class ProductWriteServiceImpl implements ProductWriteService {
 	private final ProductRepository productRepository;
 	private final ModelMapper mapper = new ModelMapper();
 	private final CodeValueRepository codeValueRepository;
-	private final AppContextUser appContextUser;
+//	private final AppContextUser appContextUser;
 
 	@Override
 	public ResponseEntity<CommandResult> addNewProduct(ProductRequestData productRequestData) {
-		AppUser loggedInUser = appContextUser.authenticated();
+//		AppUser loggedInUser = appContextUser.authenticated();
 
 		String productName = productRequestData.getName();
 		Long colorId = productRequestData.getColorId();

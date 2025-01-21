@@ -40,7 +40,7 @@ public class GlobalExceptionHandler {
 				.globalMessageCode(ex.getGlobalisationMessageCode()).debugMessage(ex.getLocalizedMessage())
 				.subErrors(ex.getApiErrors()).build();
 
-		return ResponseEntity.badRequest().body(errorResponse);
+		return ResponseEntity.status(ex.getStatusCode()).body(errorResponse);
 	}
 
 	@ExceptionHandler(ConstraintValidationException.class)

@@ -25,7 +25,7 @@ import java.util.Objects;
 
 @Slf4j
 @Configuration
-public class SwaggerConfig {
+public class OpenApiConfig {
 
 	@Value("${favourite.openapi.dev-url}")
 	private String devUrl;

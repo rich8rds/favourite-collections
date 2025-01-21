@@ -1,15 +1,14 @@
 /* Collections #2024 */
 package com.favourite.collections.infrastructure.mail.utils;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 import com.favourite.collections.infrastructure.useradmin.domain.AppUser;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.server.ServletServerHttpRequest;
 
 @Slf4j
 public class MessagesTemplate {
-	public String welcomeMessageTemplate(AppUser appUser, String token, HttpServletRequest request) {
+	public String welcomeMessageTemplate(AppUser appUser, String token, ServletServerHttpRequest request) {
 		String message = "<html> " + "<body>" + "<h5>Hi " + appUser.getFirstname() + " " + appUser.getLastname()
 				+ ",</h5> <br>" + "<p>Thank you for your interest in joining Top Restaurant."
 				+ "To complete your registration, we need you to verify your email address \n"
@@ -21,7 +20,7 @@ public class MessagesTemplate {
 		return message;
 	}
 
-	public String resendTokenTemplate(AppUser appUser, String token, HttpServletRequest request) {
+	public String resendTokenTemplate(AppUser appUser, String token, ServletServerHttpRequest request) {
 		String message = "<html> " + "<body>" + "<h5>Hi " + appUser.getFirstname() + " " + appUser.getLastname()
 				+ ",</h5> <br>" + "<p>Thank you for your interest in joining Top Restaurant."
 				+ "<br><a href=[[TOKEN_URL]]>CLICK TO VERIFY YOUR ACCOUNT. </a><p>" + "</body> " + "</html>";
@@ -32,8 +31,9 @@ public class MessagesTemplate {
 		return message;
 	}
 
-	private String getApplicationUrl(HttpServletRequest request) {
+	private String getApplicationUrl(ServletServerHttpRequest request) {
 		// return "http://" + request.getServerName() + ":3000";
-		return "http://" + request.getServerName() + ":" + request.getServerPort() + "/api/v1/auth/";
+		log.info("request,getURI(): {}", request.getURI());
+		return "http://" + request.getURI() + "/api/v1/auth/";
 	}
 }

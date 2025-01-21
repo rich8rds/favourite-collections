@@ -9,7 +9,6 @@
     <name>dashboard-service</name>
 
     <packaging>jar</packaging>
-    <version>0.0.1-SNAPSHOT</version>
     <artifactId>dashboard-service</artifactId>
 
     <dependencies>

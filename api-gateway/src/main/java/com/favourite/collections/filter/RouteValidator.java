@@ -1,6 +1,7 @@
 //package com.favourite.collections.filter;
 //
 //import lombok.extern.slf4j.Slf4j;
+//import org.apache.commons.lang3.BooleanUtils;
 //import org.springframework.http.server.reactive.ServerHttpRequest;
 //import org.springframework.stereotype.Component;
 //
@@ -28,9 +29,10 @@
 //        openApiEndpoints.put("/v2/api-docs", List.of("ALL"));
 //        openApiEndpoints.put("/v3/api-docs", List.of("ALL"));
 //        openApiEndpoints.put("/configuration", List.of("ALL"));
+//        openApiEndpoints.put("/actuator", List.of("ALL"));
 //        openApiEndpoints.put("/swagger", List.of("ALL"));
 //        openApiEndpoints.put("/swagger-ui", List.of("ALL"));
-//        openApiEndpoints.put("/webjars", List.of("ALL"));
+//        openApiEndpoints.put("/webjars/", List.of("ALL"));
 //        openApiEndpoints.put("/swagger-ui.html", List.of("ALL"));
 //        openApiEndpoints.put("/eureka", List.of("ALL"));
 //        openApiEndpoints.put("/**", List.of("ALL"));
@@ -42,9 +44,9 @@
 //            openApiEndpoints.forEach((key, value) -> {
 //                String endpoint = request.getURI().getPath();
 //                String requestMethod = String.valueOf(request.getMethod());
-//                if(endpoint.contains(key) && (value.contains(requestMethod) || value.contains("ALL"))) {
-//                    log.info("checkUrl: {}", endpoint.contains(key) && (value.contains(requestMethod) || value.contains("ALL")));
-//                    isMatch.set(true);
+//                boolean isEndpointPermitted = endpoint.contains(key) && (value.contains(requestMethod) || value.contains("ALL"));
+//                if(BooleanUtils.isTrue(isEndpointPermitted)) {
+//                   isMatch.set(true);
 //                }
 //            });
 //            return isMatch.get();

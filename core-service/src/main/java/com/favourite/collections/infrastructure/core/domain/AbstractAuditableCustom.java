@@ -14,9 +14,6 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 import org.springframework.data.domain.Auditable;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.favourite.collections.infrastructure.useradmin.domain.AppUser;
 
@@ -102,18 +99,18 @@ public abstract class AbstractAuditableCustom extends AbstractPersistableCustom
 	public AppUser authenticatedUserForAudit() {
 
 		AppUser currentUser = null;
-		final SecurityContext context = SecurityContextHolder.getContext();
-		if (context != null) {
-			final Authentication auth = context.getAuthentication();
-			if (auth != null) {
-				try {
-					currentUser = (AppUser) auth.getPrincipal();
-				} catch (ClassCastException e) {
-					log.error("class java.lang.String cannot be cast to class domain.AppUser");
-					return null;
-				}
-			}
-		}
+//		final SecurityContext context = SecurityContextHolder.getContext();
+//		if (context != null) {
+//			final Authentication auth = context.getAuthentication();
+//			if (auth != null) {
+//				try {
+//					currentUser = (AppUser) auth.getPrincipal();
+//				} catch (ClassCastException e) {
+//					log.error("class java.lang.String cannot be cast to class domain.AppUser");
+//					return null;
+//				}
+//			}
+//		}
 
 		return currentUser;
 	}

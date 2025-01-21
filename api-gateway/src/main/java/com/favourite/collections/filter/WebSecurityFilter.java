@@ -25,12 +25,12 @@
 //    @Override
 //    public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
 //
-//        boolean iSecured = routeValidator.isSecured.test(exchange.getRequest());
+//        boolean isPermitted = routeValidator.isSecured.test(exchange.getRequest());
 //        //log.info("exchange.getRequest(): {}", exchange.getRequest().getURI().getPath());
-//        log.info("Boolean value exchange.getRequest(): {}", iSecured);
+//        ///log.info("Boolean value exchange.getRequest(): {}", isPermitted);
 //
-//        if (BooleanUtils.isFalse(iSecured)) {
-//            log.info("Endpoint tightly secured for {}", exchange.getRequest().getURI());
+//        if (BooleanUtils.isFalse(isPermitted)) {
+//            //log.info("Endpoint tightly secured for {}", exchange.getRequest().getURI());
 //
 //            // header contains token or not
 //            if (!exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
@@ -58,7 +58,7 @@
 //            return chain.filter(mutateServerWebExchange);
 //
 //        } else {
-//            log.info("Endpoint not secured for {}", exchange.getRequest().getURI());
+//            //log.info("Endpoint not secured for {}", exchange.getRequest().getURI());
 //            return chain.filter(exchange);
 //        }
 //

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.favourite.collections.infrastructure.core.exceptions.AbstractPlatformException;
 import com.favourite.collections.infrastructure.useradmin.domain.AppUser;
-import com.favourite.collections.infrastructure.useradmin.util.AppContextUser;
+//import com.favourite.collections.infrastructure.useradmin.util.AppContextUser;
 import com.favourite.collections.portfolio.cart.domain.Cart;
 import com.favourite.collections.portfolio.cart.domain.CartItem;
 import com.favourite.collections.portfolio.cart.service.CartReadService;
@@ -20,11 +20,11 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 public class CartReadServiceImpl implements CartReadService {
-	private final AppContextUser appContextUser;
+//	private final AppContextUser appContextUser;
 
 	@Override
 	public ResponseEntity<Set<CartItem>> viewCartItems() {
-		AppUser loggedInUser = this.appContextUser.authenticated();
+		AppUser loggedInUser = new AppUser(); //this.appContextUser.authenticated();
 		Cart cart = loggedInUser.getCart();
 		Set<CartItem> cartItems = cart.getItems();
 		if (cartItems.isEmpty()) {

@@ -13,7 +13,7 @@ import com.favourite.collections.infrastructure.core.data.CommandResultBuilder;
 import com.favourite.collections.infrastructure.core.exceptions.AbstractPlatformException;
 import com.favourite.collections.infrastructure.useradmin.domain.AppUser;
 import com.favourite.collections.infrastructure.useradmin.repository.AppUserRepository;
-import com.favourite.collections.infrastructure.useradmin.util.AppContextUser;
+//import com.favourite.collections.infrastructure.useradmin.util.AppContextUser;
 import com.favourite.collections.portfolio.cart.domain.Cart;
 import com.favourite.collections.portfolio.cart.domain.CartItem;
 import com.favourite.collections.portfolio.cart.repository.CartItemRepository;
@@ -30,14 +30,14 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class CartWriteServiceImpl implements CartWriteService {
 	private final AppUserRepository appUserRepository;
-	private final AppContextUser appContextUser;
+//	private final AppContextUser appContextUser;
 	private final ProductRepository productRepository;
 	private final CartItemRepository cartItemRepository;
 	private final CartRepository cartRepository;
 
 	@Override
 	public ResponseEntity<CommandResult> addProductToCart(Long productId) {
-		AppUser loggedInUser = appContextUser.authenticated();
+		AppUser loggedInUser = new AppUser(); //appContextUser.authenticated();
 		Product product = productRepository.findById(productId).orElseThrow(
 				() -> new AbstractPlatformException("error.product.id.not.found", "Product not available", 404));
 
@@ -81,7 +81,7 @@ public class CartWriteServiceImpl implements CartWriteService {
 
 	@Override
 	public ResponseEntity<CommandResult> removeProductFromCart(Long itemId) {
-		AppUser loggedInUser = appContextUser.authenticated();
+		AppUser loggedInUser = new AppUser(); //appContextUser.authenticated();
 		CartItem cartItem = cartItemRepository.findById(itemId)
 				.orElseThrow(() -> new AbstractPlatformException("Item is not in cart", "Item does not exist", 404));
 
@@ -96,7 +96,7 @@ public class CartWriteServiceImpl implements CartWriteService {
 
 	@Override
 	public ResponseEntity<CommandResult> clearCart(Long cartId) {
-		AppUser loggedInUser = this.appContextUser.authenticated();
+		AppUser loggedInUser = new AppUser(); //appContextUser.authenticated();
 		Cart cart = loggedInUser.getCart();
 		Set<CartItem> cartItems = cart.getItems();
 		cartItems.clear();
@@ -107,7 +107,7 @@ public class CartWriteServiceImpl implements CartWriteService {
 
 	@Override
 	public ResponseEntity<CommandResult> increaseQuantity(Long productId) {
-		AppUser loggedInUser = this.appContextUser.authenticated();
+		AppUser loggedInUser = new AppUser(); //appContextUser.authenticated();
 		Cart cart = loggedInUser.getCart();
 
 		CartItem savedCartItem = this.cartItemRepository.findByProductId(productId)
@@ -142,7 +142,7 @@ public class CartWriteServiceImpl implements CartWriteService {
 
 	@Override
 	public ResponseEntity<CommandResult> decreaseQuantity(Long productId) {
-		AppUser loggedInUser = this.appContextUser.authenticated();
+		AppUser loggedInUser = new AppUser(); //appContextUser.authenticated();
 
 		Cart cart = loggedInUser.getCart();
 
