@@ -1,6 +1,10 @@
 /* Collections #2024 */
 package com.favourite.collections.infrastructure.useradmin.api;
 
+import com.favourite.collections.commons.core.data.CommandResult;
+import com.favourite.collections.commons.useradmin.data.PermissionRequest;
+import com.favourite.collections.commons.useradmin.data.PermissionUpdate;
+import com.favourite.collections.commons.useradmin.service.PermissionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.favourite.collections.infrastructure.core.data.CommandResult;
-import com.favourite.collections.infrastructure.useradmin.data.PermissionRequest;
-import com.favourite.collections.infrastructure.useradmin.data.PermissionUpdate;
-import com.favourite.collections.infrastructure.useradmin.service.PermissionService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -26,12 +26,12 @@ import lombok.RequiredArgsConstructor;
 public class PermissionController {
 	private final PermissionService permissionService;
 
-	@GetMapping("/permissions")
+	@GetMapping
 	public ResponseEntity<?> getAllPermissions() {
 		return permissionService.getAllPermissions();
 	}
 
-	@PostMapping("/permissions")
+	@PostMapping
 	public ResponseEntity<CommandResult> createPermissions(@RequestBody PermissionRequest permissionRequest) {
 		return permissionService.createNewPermission(permissionRequest);
 	}

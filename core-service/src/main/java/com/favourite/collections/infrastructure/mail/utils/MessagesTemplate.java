@@ -1,8 +1,8 @@
 /* Collections #2024 */
 package com.favourite.collections.infrastructure.mail.utils;
 
-import com.favourite.collections.infrastructure.useradmin.domain.AppUser;
 
+import com.favourite.collections.commons.useradmin.domain.AppUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.server.ServletServerHttpRequest;
 

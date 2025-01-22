@@ -1,6 +1,11 @@
 /* Collections #2024 */
 package com.favourite.collections.infrastructure.useradmin.api;
 
+import com.favourite.collections.commons.core.data.CommandResult;
+import com.favourite.collections.commons.core.data.SearchParameters;
+import com.favourite.collections.commons.useradmin.data.CodeValueData;
+import com.favourite.collections.commons.useradmin.service.CodeValueReadService;
+import com.favourite.collections.commons.useradmin.service.CodeValueWriteService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,11 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.favourite.collections.infrastructure.core.data.CommandResult;
-import com.favourite.collections.infrastructure.core.data.SearchParameters;
-import com.favourite.collections.infrastructure.useradmin.data.CodeValueData;
-import com.favourite.collections.infrastructure.useradmin.service.CodeValueReadService;
-import com.favourite.collections.infrastructure.useradmin.service.CodeValueWriteService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

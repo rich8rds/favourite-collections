@@ -3,9 +3,8 @@ package com.favourite.collections.portfolio.cart.service;
 
 import java.util.Set;
 
+import com.favourite.collections.commons.useradmin.domain.CartItem;
 import org.springframework.http.ResponseEntity;
-
-import com.favourite.collections.portfolio.cart.domain.CartItem;
 
 public interface CartReadService {
 	ResponseEntity<Set<CartItem>> viewCartItems();

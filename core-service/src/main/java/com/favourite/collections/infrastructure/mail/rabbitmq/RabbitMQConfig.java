@@ -1,6 +1,7 @@
 /* Collections #2024 */
 package com.favourite.collections.infrastructure.mail.rabbitmq;
 
+import com.favourite.collections.commons.core.json.FromJsonHelper;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
@@ -13,7 +14,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.favourite.collections.infrastructure.core.json.FromJsonHelper;
 import com.favourite.collections.infrastructure.mail.data.EmailRequestData;
 import com.favourite.collections.infrastructure.mail.service.EmailService;
 

@@ -5,6 +5,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.favourite.collections.commons.core.data.SearchParameters;
+import com.favourite.collections.commons.core.exceptions.AbstractPlatformException;
+import com.favourite.collections.commons.useradmin.domain.CodeValue;
+import com.favourite.collections.commons.useradmin.domain.Product;
+import com.favourite.collections.commons.useradmin.repository.CodeValueRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -19,12 +25,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
-import com.favourite.collections.infrastructure.core.data.SearchParameters;
-import com.favourite.collections.infrastructure.core.exceptions.AbstractPlatformException;
-import com.favourite.collections.infrastructure.useradmin.domain.CodeValue;
-import com.favourite.collections.infrastructure.useradmin.repository.CodeValueRepository;
 import com.favourite.collections.portfolio.product.data.ProductFetchData;
-import com.favourite.collections.portfolio.product.domain.Product;
 import com.favourite.collections.portfolio.product.util.ModelMapper;
 
 import lombok.RequiredArgsConstructor;

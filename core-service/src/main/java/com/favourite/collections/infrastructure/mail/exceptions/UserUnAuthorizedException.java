@@ -1,7 +1,8 @@
 /* Collections #2024 */
 package com.favourite.collections.infrastructure.mail.exceptions;
 
-import com.favourite.collections.infrastructure.core.exceptions.AbstractPlatformException;
+
+import com.favourite.collections.commons.core.exceptions.AbstractPlatformException;
 
 public class UserUnAuthorizedException extends AbstractPlatformException {
 

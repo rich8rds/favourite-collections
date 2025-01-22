@@ -3,8 +3,8 @@ package com.favourite.collections.portfolio.product.data;
 
 import java.math.BigDecimal;
 
-import com.favourite.collections.infrastructure.useradmin.domain.CodeValue;
 
+import com.favourite.collections.commons.useradmin.domain.CodeValue;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

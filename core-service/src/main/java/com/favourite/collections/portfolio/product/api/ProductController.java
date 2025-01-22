@@ -3,6 +3,8 @@ package com.favourite.collections.portfolio.product.api;
 
 import java.time.LocalDateTime;
 
+import com.favourite.collections.commons.core.data.CommandResult;
+import com.favourite.collections.commons.core.data.SearchParameters;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.favourite.collections.infrastructure.core.data.CommandResult;
-import com.favourite.collections.infrastructure.core.data.SearchParameters;
 import com.favourite.collections.portfolio.product.data.ProductFetchData;
 import com.favourite.collections.portfolio.product.data.ProductRequestData;
 import com.favourite.collections.portfolio.product.service.ProductReadService;

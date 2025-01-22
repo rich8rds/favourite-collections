@@ -1,6 +1,10 @@
 /* Collections #2024 */
 package com.favourite.collections.infrastructure.useradmin.api;
 
+import com.favourite.collections.commons.core.data.CommandResult;
+import com.favourite.collections.commons.useradmin.data.RolePermissionRequest;
+import com.favourite.collections.commons.useradmin.data.RoleRequest;
+import com.favourite.collections.commons.useradmin.service.RoleService;
 import jakarta.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
@@ -12,11 +16,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.favourite.collections.infrastructure.core.data.CommandResult;
-import com.favourite.collections.infrastructure.useradmin.data.RolePermissionRequest;
-import com.favourite.collections.infrastructure.useradmin.data.RoleRequest;
-import com.favourite.collections.infrastructure.useradmin.service.RoleService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

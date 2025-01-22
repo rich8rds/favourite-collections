@@ -3,15 +3,16 @@ package com.favourite.collections.portfolio.customer.domain;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import com.favourite.collections.commons.core.domain.AbstractAuditableCustom;
+import com.favourite.collections.commons.useradmin.domain.Address;
+import com.favourite.collections.commons.useradmin.domain.AppUser;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
-import com.favourite.collections.infrastructure.core.domain.AbstractAuditableCustom;
-import com.favourite.collections.infrastructure.useradmin.domain.Address;
-import com.favourite.collections.infrastructure.useradmin.domain.AppUser;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
