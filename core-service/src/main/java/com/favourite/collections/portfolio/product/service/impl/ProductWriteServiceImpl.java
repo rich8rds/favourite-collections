@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 //import com.favourite.collections.infrastructure.useradmin.util.AppContextUser;
-import com.favourite.collections.portfolio.product.data.ProductRequestData;
+import com.favourite.collections.commons.portfolio.product.data.ProductRequestData;
 import com.favourite.collections.portfolio.product.repository.ProductRepository;
 import com.favourite.collections.portfolio.product.service.ProductWriteService;
 import com.favourite.collections.portfolio.product.util.ModelMapper;

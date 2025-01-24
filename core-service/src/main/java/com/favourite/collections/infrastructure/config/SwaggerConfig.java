@@ -1,5 +1,13 @@
-///* RICHARDS AND FAVOUR (C)2024 */
-//package com.favourite.collections.config;
+package com.favourite.collections.infrastructure.config;///* Collections #2024 */
+//package com.favourite.collections.infrastructure.useradmin.config;
+//
+//import java.util.HashMap;
+//import java.util.List;
+//import java.util.Map;
+//
+//import org.springframework.beans.factory.annotation.Value;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
 //
 //import io.swagger.v3.oas.models.Components;
 //import io.swagger.v3.oas.models.OpenAPI;
@@ -9,23 +17,9 @@
 //import io.swagger.v3.oas.models.security.SecurityRequirement;
 //import io.swagger.v3.oas.models.security.SecurityScheme;
 //import io.swagger.v3.oas.models.servers.Server;
-//import lombok.extern.slf4j.Slf4j;
-//import org.springdoc.core.properties.SwaggerUiConfigParameters;
-//import org.springframework.beans.factory.annotation.Value;
-//import org.springframework.boot.CommandLineRunner;
-//import org.springframework.cloud.gateway.route.RouteDefinition;
-//import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
 //
-//import java.util.HashMap;
-//import java.util.List;
-//import java.util.Map;
-//import java.util.Objects;
-//
-//@Slf4j
 //@Configuration
-//public class OpenApiConfig {
+//public class SwaggerConfig {
 //
 //	@Value("${favourite.openapi.dev-url}")
 //	private String devUrl;
@@ -75,23 +69,4 @@
 //
 //		return securitySchemesMap;
 //	}
-//
-//	@Bean
-//	public CommandLineRunner openApiGroups(RouteDefinitionLocator locator, SwaggerUiConfigParameters swaggerUiParameters) {
-//		return args -> {
-//			List<RouteDefinition> routeDefinitions = Objects.requireNonNull(locator.getRouteDefinitions().collectList().block());
-//
-//			log.info("RouteDefinitions: {}", routeDefinitions);
-//			log.info("RouteDefinitions Size: {}", routeDefinitions.size());
-//
-//			routeDefinitions.stream()
-//					.map(RouteDefinition::getId)
-//					.filter(id -> id.matches(".*-service"))
-//					.map(id -> id.replace("-service", ""))
-//					.forEach(swaggerUiParameters::addGroup);
-//		};
-//
-//	}
-//
-//
 //}

@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.favourite.collections.portfolio.product.data.ProductFetchData;
+import com.favourite.collections.commons.portfolio.product.data.ProductFetchData;
 import com.favourite.collections.portfolio.product.repository.ProductRepository;
 import com.favourite.collections.portfolio.product.service.ProductReadService;
 

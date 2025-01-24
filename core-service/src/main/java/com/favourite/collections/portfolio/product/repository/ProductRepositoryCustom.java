@@ -4,7 +4,7 @@ package com.favourite.collections.portfolio.product.repository;
 import com.favourite.collections.commons.core.data.SearchParameters;
 import org.springframework.data.domain.Page;
 
-import com.favourite.collections.portfolio.product.data.ProductFetchData;
+import com.favourite.collections.commons.portfolio.product.data.ProductFetchData;
 
 public interface ProductRepositoryCustom {
 

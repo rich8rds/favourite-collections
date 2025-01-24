@@ -2,8 +2,8 @@
 package com.favourite.collections.portfolio.product.util;
 
 import com.favourite.collections.commons.useradmin.domain.Product;
-import com.favourite.collections.portfolio.product.data.ProductFetchData;
-import com.favourite.collections.portfolio.product.data.ProductRequestData;
+import com.favourite.collections.commons.portfolio.product.data.ProductFetchData;
+import com.favourite.collections.commons.portfolio.product.data.ProductRequestData;
 
 public class ModelMapper {
 	public ProductFetchData fromProductToData(Product product) {

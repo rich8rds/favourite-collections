@@ -25,7 +25,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
-import com.favourite.collections.portfolio.product.data.ProductFetchData;
+import com.favourite.collections.commons.portfolio.product.data.ProductFetchData;
 import com.favourite.collections.portfolio.product.util.ModelMapper;
 
 import lombok.RequiredArgsConstructor;

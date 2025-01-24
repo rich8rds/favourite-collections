@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.favourite.collections.portfolio.product.data.ProductFetchData;
-import com.favourite.collections.portfolio.product.data.ProductRequestData;
+import com.favourite.collections.commons.portfolio.product.data.ProductFetchData;
+import com.favourite.collections.commons.portfolio.product.data.ProductRequestData;
 import com.favourite.collections.portfolio.product.service.ProductReadService;
 import com.favourite.collections.portfolio.product.service.ProductWriteService;
 

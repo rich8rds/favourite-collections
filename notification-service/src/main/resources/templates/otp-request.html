@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+    <head>
+        <title th:text="${otpSubject}">One-Time Password (OTP) for Verification</title>
+    </head>
+    <body>
+        <h2>Verification Code</h2>
+        <p>We received a request to verify your account.</p>
+        <p>This is your verification code:</p>
+        <h1><b th:text="${otp}"><span style="color: blue;"></span></b></h1>
+        <p>This code expires in 3 minutes.</p>
+        <p>If you did not initiate this request, please ignore this email, and no action will be taken.</p>
+    </body>
+</html>

@@ -6,7 +6,7 @@ import com.favourite.collections.commons.core.data.SearchParameters;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 
-import com.favourite.collections.portfolio.product.data.ProductFetchData;
+import com.favourite.collections.commons.portfolio.product.data.ProductFetchData;
 
 public interface ProductReadService {
 	ResponseEntity<Page<ProductFetchData>> retrieveAllProducts(SearchParameters searchParameters);
