@@ -1,13 +1,13 @@
+///* Collections #2024 */
 //package com.favourite.collections;
 //
 //import org.junit.jupiter.api.Test;
 //import org.springframework.boot.test.context.SpringBootTest;
 //
 //@SpringBootTest
-//class DashboardServiceApplicationTests {
+//class CoreServiceApplicationTests {
 //
-//    @Test
-//    void contextLoads() {
-//    }
-//
+//	@Test
+//	void contextLoads() {
+//	}
 //}

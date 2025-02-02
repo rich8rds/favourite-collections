@@ -15,6 +15,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @Table(name = "m_permission")
@@ -24,7 +25,7 @@ import lombok.ToString;
 @Setter
 @Builder
 @ToString
-public class Permission extends AbstractAuditableCustom {// implements GrantedAuthority {
+public class Permission extends AbstractAuditableCustom implements GrantedAuthority {
 	@Column(name = "grouping")
 	private String grouping;
 
@@ -43,8 +44,8 @@ public class Permission extends AbstractAuditableCustom {// implements GrantedAu
 	@Column(name = "is_disabled")
 	private Boolean isDisabled;
 
-//	@Override
-//	public String getAuthority() {
-//		return this.displayName;
-//	}
+	@Override
+	public String getAuthority() {
+		return this.displayName;
+	}
 }

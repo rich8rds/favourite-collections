@@ -1,5 +1,5 @@
 ///* Collections #2024 */
-//package com.favourite.collections.infrastructure.useradmin.util;
+//package com.favourite.collections.commons.useradmin.util;
 //
 //import java.time.Instant;
 //import java.time.temporal.ChronoUnit;
@@ -11,6 +11,8 @@
 //import java.util.stream.Collectors;
 //import javax.crypto.SecretKey;
 //
+//import com.favourite.collections.commons.core.exceptions.AbstractPlatformException;
+//import com.favourite.collections.commons.core.service.ResponseCodeEnum;
 //import org.springframework.beans.factory.annotation.Value;
 //import org.springframework.security.core.Authentication;
 //import org.springframework.security.core.GrantedAuthority;
@@ -18,8 +20,6 @@
 //import org.springframework.security.core.userdetails.UserDetails;
 //import org.springframework.stereotype.Component;
 //
-//import com.favourite.collections.infrastructure.core.exceptions.AbstractPlatformException;
-//import com.favourite.collections.infrastructure.core.service.ResponseCodeEnum;
 //
 //import io.jsonwebtoken.Claims;
 //import io.jsonwebtoken.Jwts;
@@ -104,7 +104,7 @@
 //	public String generateVerificationToken(String email) {
 //		Instant now = Instant.now();
 //
-//		return Jwts.builder().issuer("self").claims(new HashMap<>()).subject(email).issuedAt(Date.from(now))
+//		return Jwts.builder().setClaims(new HashMap<>()).subject(email).issuedAt(Date.from(now))
 //				.expiration(Date.from(now.plus(2, ChronoUnit.MINUTES))).signWith(getSigningKey()).compact();
 //	}
 //}

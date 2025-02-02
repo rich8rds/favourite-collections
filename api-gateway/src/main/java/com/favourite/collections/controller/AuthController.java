@@ -1,0 +1,81 @@
+package com.favourite.collections.controller;
+
+import com.favourite.collections.commons.core.data.CommandResult;
+import com.favourite.collections.commons.useradmin.data.ChangePasswordData;
+import com.favourite.collections.commons.useradmin.data.ForgotPasswordData;
+import com.favourite.collections.commons.useradmin.data.LoginData;
+import com.favourite.collections.commons.useradmin.data.RegistrationData;
+import com.favourite.collections.commons.useradmin.data.UpdatePasswordData;
+import com.favourite.collections.commons.useradmin.exception.ConstraintValidationException;
+import com.favourite.collections.service.AuthService;
+import jakarta.validation.Valid;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.server.ServletServerHttpRequest;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+
+@Tag(name = "Authentication")
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("api/v1/auth/")
+public class AuthController {
+	private final AuthService authService;
+
+	@PostMapping("login")
+	public ResponseEntity<CommandResult> login(@RequestBody LoginData loginData) {
+		return authService.loginUserIn(loginData);
+	}
+
+	@PostMapping("register")
+	public ResponseEntity<CommandResult> register(@RequestBody @Valid RegistrationData registerData,
+												  ServletServerHttpRequest request) {
+		if (!registerData.passwordsMatch()) {
+			throw new ConstraintValidationException("error.auth.passwords.do.not.match", "Passwords do not match");
+		}
+		return authService.register(registerData, request);
+	}
+
+	@GetMapping("verify-registration")
+	public ResponseEntity<CommandResult> verifyAccount(@RequestParam String token) {
+		return authService.verifyUserVerificationToken(token);
+	}
+
+	@GetMapping("resend-verification-token")
+	public ResponseEntity<CommandResult> resendVerificationToken(@RequestParam String token,
+																 ServletServerHttpRequest request) {
+		return authService.resendVerificationToken(token, request);
+	}
+
+	@PostMapping("update-password")
+	public ResponseEntity<CommandResult> updatePassword(@RequestBody UpdatePasswordData updatePasswordData) {
+		if (!updatePasswordData.passwordsMatch()) {
+			throw new ConstraintValidationException("error.auth.passwords.do.not.match", "Passwords do not match");
+		}
+		return authService.updatePassword(updatePasswordData);
+	}
+
+	@PostMapping("forgot-password")
+	public ResponseEntity<CommandResult> forgotPassword(@RequestBody ForgotPasswordData forgotPasswordData,
+														ServletServerHttpRequest request) {
+		return authService.getForgotPasswordToken(forgotPasswordData, request);
+	}
+
+	@PostMapping("change-password")
+	public ResponseEntity<CommandResult> resetPassword(@RequestParam String token,
+			@Valid @RequestBody ChangePasswordData changePasswordData) {
+		if (!changePasswordData.passwordsMatch()) {
+			throw new ConstraintValidationException("error.auth.passwords.do.not.match", "Passwords do not match");
+		}
+		return authService.changePasswordWithToken(token, changePasswordData);
+	}
+
+}

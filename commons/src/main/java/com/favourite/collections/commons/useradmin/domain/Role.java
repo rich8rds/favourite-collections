@@ -29,7 +29,7 @@ import lombok.ToString;
 @Builder
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Role extends AbstractAuditableCustom {
+public class Role extends AbstractAuditableCustom  {
 	@Column(name = "name", unique = true)
 	private String name;
 
