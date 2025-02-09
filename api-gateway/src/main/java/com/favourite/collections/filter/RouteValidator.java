@@ -29,6 +29,8 @@ public class RouteValidator {
 		openApiEndpoints.put("/authenticated-user", List.of(ALL.name()));
 		openApiEndpoints.put("/api/v1/email", List.of(ALL.name()));
 		openApiEndpoints.put("/api/v1/gateway", List.of(ALL.name()));
+		openApiEndpoints.put("/actuator/info", List.of(ALL.name()));
+		openApiEndpoints.put("/actuator/**", List.of(ALL.name()));
 		openApiEndpoints.put("/api/v1/auth", List.of(ALL.name()));
 		openApiEndpoints.put("/api/v1/twits", List.of(GET.name()));
 		openApiEndpoints.put("/v2/api-docs", List.of(ALL.name()));
