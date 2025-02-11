@@ -7,5 +7,5 @@
     <property name="current_datetime" value="NOW()"/>
     <property name="uuid" value="uuid()" context="mysql"/>
     <property name="uuid" value="uuid_generate_v4()" context="postgresql"/>
-    <includeAll path="db/changelog/favourite/changelog-parts.xml" errorIfMissingOrEmpty="false" context="favourite_collections" />
+    <include file="db/changelog/favourite/changelog-parts.xml" context="favourite_collections" />
 </databaseChangeLog>

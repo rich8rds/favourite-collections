@@ -17,14 +17,14 @@ public class RabbitMQListener {
 
     @RabbitListener(queues = RabbitMQConfig.OTP_QUEUE)
     public void receiveMessage(EmailNotificationRequest request) {
-        log.info("Received notification request: {}", request.getType());
-        this.notificationService.sendEmail(request);
+        log.info("Received notification request (OTP): {}", request.getType());
+        this.notificationService.sendOTPForVerification(request);
     }
 
 
     @RabbitListener(queues = RabbitMQConfig.USER_QUEUE)
     public void receiveInvitationMessage(EmailNotificationRequest request) {
         log.info("Received email notification request: {}", request);
-        this.notificationService.sendEmail(request);
+        this.notificationService.sendOTPForVerification(request);
     }
 }

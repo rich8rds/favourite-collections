@@ -13,7 +13,6 @@ import org.springframework.util.AntPathMatcher;
 import lombok.extern.slf4j.Slf4j;
 
 import static com.favourite.collections.util.RequestMethods.ALL;
-import static com.favourite.collections.util.RequestMethods.GET;
 
 @Slf4j
 @Component
@@ -22,24 +21,21 @@ public class RouteValidator {
 	public final Map<String, List<String>> openApiEndpoints = new HashMap<>();
 
 	public RouteValidator() {
-		openApiEndpoints.put("/home", List.of(ALL.name()));
+		openApiEndpoints.put("/", List.of(ALL.name()));
 		openApiEndpoints.put("index", List.of(ALL.name()));
 		openApiEndpoints.put("/css", List.of(ALL.name()));
 		openApiEndpoints.put("/js", List.of(ALL.name()));
-		openApiEndpoints.put("/authenticated-user", List.of(ALL.name()));
-		openApiEndpoints.put("/api/v1/email", List.of(ALL.name()));
-		openApiEndpoints.put("/api/v1/gateway", List.of(ALL.name()));
 		openApiEndpoints.put("/actuator/info", List.of(ALL.name()));
 		openApiEndpoints.put("/actuator/**", List.of(ALL.name()));
-		openApiEndpoints.put("/api/v1/auth", List.of(ALL.name()));
-		openApiEndpoints.put("/api/v1/twits", List.of(GET.name()));
+		openApiEndpoints.put("/api/v1/auth/**", List.of(ALL.name()));
+		openApiEndpoints.put("/api/v1/notification", List.of(ALL.name()));
+		openApiEndpoints.put("/api/v1/notification/**", List.of(ALL.name()));
 		openApiEndpoints.put("/v2/api-docs", List.of(ALL.name()));
 		openApiEndpoints.put("/v3/api-docs", List.of(ALL.name()));
 		openApiEndpoints.put("/configuration", List.of(ALL.name()));
-		openApiEndpoints.put("/actuator", List.of(ALL.name()));
-		openApiEndpoints.put("/swagger", List.of(ALL.name()));
-		openApiEndpoints.put("/swagger-ui", List.of(ALL.name()));
-		openApiEndpoints.put("/webjars/", List.of(ALL.name()));
+		openApiEndpoints.put("/swagger/**", List.of(ALL.name()));
+		openApiEndpoints.put("/swagger-ui/**", List.of(ALL.name()));
+		openApiEndpoints.put("/webjars/**", List.of(ALL.name()));
 		openApiEndpoints.put("/swagger-ui.html", List.of(ALL.name()));
 		openApiEndpoints.put("/eureka", List.of(ALL.name()));
 	}

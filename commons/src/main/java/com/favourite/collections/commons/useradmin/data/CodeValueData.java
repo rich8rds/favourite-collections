@@ -2,14 +2,18 @@
 package com.favourite.collections.commons.useradmin.data;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.favourite.collections.commons.core.domain.AbstractPersistableCustom;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
-@Data
+@Getter
+@Setter
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString

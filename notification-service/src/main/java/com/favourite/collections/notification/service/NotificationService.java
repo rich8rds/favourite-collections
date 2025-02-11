@@ -3,7 +3,7 @@ package com.favourite.collections.notification.service;
 import com.favourite.collections.commons.useradmin.data.EmailNotificationRequest;
 import com.favourite.collections.commons.useradmin.data.MailClientRequest;
 import com.favourite.collections.commons.useradmin.enums.NotificationType;
-import com.favourite.collections.notification.config.GmailMailConfig;
+//import com.favourite.collections.notification.config.GmailMailConfig;
 import com.favourite.collections.notification.config.ThymeleafConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,37 +11,40 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 
+import static com.favourite.collections.notification.util.ContextUtil.NAME;
+import static com.favourite.collections.notification.util.ContextUtil.OTP;
+
 
 @Slf4j
 @RequiredArgsConstructor
 @Service
 public class NotificationService {
 
-    private final GmailMailConfig mail;
+//    private final GmailMailConfig mail;
     private final ThymeleafConfig thymeleafConfig;
 
-    public void sendEmail(EmailNotificationRequest request) {
+    public void sendOTPForVerification(EmailNotificationRequest request) {
         log.info("Processing email notification: {}", request.getType());
         try {
             Context context = new Context();
-            context.setVariable("name", request.getName());
+            context.setVariable(NAME, request.getName());
+            log.info("otp: {}", request.getOtp());
+            context.setVariable(OTP, request.getOtp());
 
-            if (request.getTemplateData().containsKey("otp")) {
-                context.setVariable("otp", request.getTemplateData().get("otp"));
-            }
-
-            String template = getTemplateForNotificationType(request.getType());
-            String subject = getSubjectForNotificationType(request.getType());
+            String[] fileDetails = getTemplateForNotificationType(request.getType());
+            String template = fileDetails[0];
+            String subject = fileDetails[1];
 
             String output = thymeleafConfig.process(template, context);
-            log.info("Processed template: {}", template);
+            log.info("Processed template output: {}", output);
 
             MailClientRequest mailRequest = MailClientRequest.fromSendEmailRequest(
                     request.getTo(),
                     subject,
                     output
             );
-            mail.sendEmail(mailRequest);
+
+            //mail.sendEmail(mailRequest);
 
             log.info("Successfully sent email to: {}", request.getTo());
         } catch (Exception e) {
@@ -49,21 +52,17 @@ public class NotificationService {
         }
     }
 
-    private String getTemplateForNotificationType(NotificationType type) {
+    private String[] getTemplateForNotificationType(NotificationType type) {
+
         return switch (type) {
-            case VERIFICATION_OTP -> "verification-email";
-            case PASSWORD_RESET_OTP -> "password-reset";
-            case WELCOME -> "welcome-email";
-            case PASSWORD_CHANGED -> "password-changed";
+            case VERIFICATION_OTP -> templateArray("verification-email", "Email OTP verification");
+            case PASSWORD_RESET_OTP -> templateArray("password-reset", "Password Reset");
+            case WELCOME -> templateArray("welcome-email", "Welcome to Favourite Collections");
+            case PASSWORD_CHANGED -> templateArray("password-changed", "Password Changed");
         };
     }
 
-    private String getSubjectForNotificationType(NotificationType type) {
-        return switch (type) {
-            case VERIFICATION_OTP -> "Email Verification";
-            case PASSWORD_RESET_OTP -> "Password Reset";
-            case WELCOME -> "Welcome to Favourite Collections";
-            case PASSWORD_CHANGED -> "Password Changed Successfully";
-        };
+    private String[] templateArray(String filename, String fileSubject) {
+        return new String[]{filename, fileSubject};
     }
 }

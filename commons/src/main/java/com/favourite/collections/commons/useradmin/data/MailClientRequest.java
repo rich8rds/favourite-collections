@@ -1,11 +1,17 @@
 package com.favourite.collections.commons.useradmin.data;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.io.Serializable;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+@AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class MailClientRequest implements Serializable {
     private String to;

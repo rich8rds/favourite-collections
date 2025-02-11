@@ -15,6 +15,7 @@ public class ThymeleafConfig {
 
     public String process(String templatePath, Context context) {
         try {
+            log.info("Processing template: {}", templatePath);
             return templateEngine.process(templatePath, context);
         } catch (Exception e) {
             log.error("Error processing template path: {}", templatePath, e);

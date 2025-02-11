@@ -23,19 +23,21 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
+import static com.favourite.collections.config.ApiConstants.AUTH_BASE_URL;
+
 @Tag(name = "Authentication")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/auth/")
+@RequestMapping(AUTH_BASE_URL)
 public class AuthController {
 	private final AuthService authService;
 
-	@PostMapping("login")
+	@PostMapping("/login")
 	public ResponseEntity<CommandResult> login(@RequestBody LoginData loginData) {
 		return authService.loginUserIn(loginData);
 	}
 
-	@PostMapping("register")
+	@PostMapping("/register")
 	public ResponseEntity<CommandResult> register(@RequestBody @Valid RegistrationData registerData,
 												  ServletServerHttpRequest request) {
 		if (!registerData.passwordsMatch()) {
@@ -44,18 +46,18 @@ public class AuthController {
 		return authService.register(registerData, request);
 	}
 
-	@GetMapping("verify-registration")
+	@GetMapping("/verify-registration")
 	public ResponseEntity<CommandResult> verifyAccount(@RequestParam String token) {
 		return authService.verifyUserVerificationToken(token);
 	}
 
-	@GetMapping("resend-verification-token")
+	@GetMapping("/resend-verification-token")
 	public ResponseEntity<CommandResult> resendVerificationToken(@RequestParam String token,
 																 ServletServerHttpRequest request) {
 		return authService.resendVerificationToken(token, request);
 	}
 
-	@PostMapping("update-password")
+	@PostMapping("/update-password")
 	public ResponseEntity<CommandResult> updatePassword(@RequestBody UpdatePasswordData updatePasswordData) {
 		if (!updatePasswordData.passwordsMatch()) {
 			throw new ConstraintValidationException("error.auth.passwords.do.not.match", "Passwords do not match");
@@ -63,13 +65,13 @@ public class AuthController {
 		return authService.updatePassword(updatePasswordData);
 	}
 
-	@PostMapping("forgot-password")
+	@PostMapping("/forgot-password")
 	public ResponseEntity<CommandResult> forgotPassword(@RequestBody ForgotPasswordData forgotPasswordData,
 														ServletServerHttpRequest request) {
 		return authService.getForgotPasswordToken(forgotPasswordData, request);
 	}
 
-	@PostMapping("change-password")
+	@PostMapping("/change-password")
 	public ResponseEntity<CommandResult> resetPassword(@RequestParam String token,
 			@Valid @RequestBody ChangePasswordData changePasswordData) {
 		if (!changePasswordData.passwordsMatch()) {
