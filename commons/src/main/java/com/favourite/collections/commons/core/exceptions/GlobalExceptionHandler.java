@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.favourite.collections.commons.useradmin.exception.ConstraintValidationException;
+import org.springframework.beans.BeanInstantiationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -16,9 +17,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.favourite.collections.commons.core.data.ApiError;
 import com.favourite.collections.commons.core.data.ApiSubError;
 import com.favourite.collections.commons.core.data.ApiValidationError;
+import org.springframework.web.server.handler.ResponseStatusExceptionHandler;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalExceptionHandler extends ResponseStatusExceptionHandler {
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ApiError> handleValidationExceptions(MethodArgumentNotValidException ex) {
 		List<ApiSubError> errors = new ArrayList<>();
@@ -50,6 +52,17 @@ public class GlobalExceptionHandler {
 		ApiError errorResponse = ApiError.builder().message(ex.getDefaultUserMessage())
 				.globalMessageCode(ex.getGlobalisationMessageCode()).debugMessage(ex.getLocalizedMessage())
 				.subErrors(ex.getApiErrors()).build();
+
+		return ResponseEntity.badRequest().body(errorResponse);
+	}
+
+	@ExceptionHandler(BeanInstantiationException.class)
+	@ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+	public ResponseEntity<ApiError> beanInstantiationException(BeanInstantiationException ex) {
+
+		ApiError errorResponse = ApiError.builder().message(ex.getMessage())
+				.globalMessageCode("Error instantiating bean").debugMessage(ex.getLocalizedMessage())
+				.build();
 
 		return ResponseEntity.badRequest().body(errorResponse);
 	}

@@ -109,7 +109,7 @@
             <column name="firstname" value="Favorite"/>
             <column name="lastname" value="Olly"/>
             <column name="email" value="rbukunmi8@@gmail.com"/>
-            <column name="password" value="pa@@SWrd093!@))"/>
+            <column name="password" value="{SHA-256}{1}5787039480429368bf94732aacc771cd0a3ea02bcf504ffe1185ab94213bc63a"/>
             <column name="phone_no" value="08143015906"/>
             <column name="is_active" value="true"/>
             <column name="is_verified" value="true"/>

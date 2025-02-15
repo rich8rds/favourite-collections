@@ -17,7 +17,7 @@ public interface AuthService {
 
 	ResponseEntity<CommandResult> loginUserIn(LoginData loginData);
 
-	ResponseEntity<CommandResult> register(RegistrationData registerData, ServletServerHttpRequest request);
+	ResponseEntity<CommandResult> register(RegistrationData registerData);
 
 	ResponseEntity<CommandResult> verifyUserVerificationToken(String token);
 

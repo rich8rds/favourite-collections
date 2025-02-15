@@ -8,6 +8,7 @@ import com.favourite.collections.commons.useradmin.data.RegistrationData;
 import com.favourite.collections.commons.useradmin.data.UpdatePasswordData;
 import com.favourite.collections.commons.useradmin.exception.ConstraintValidationException;
 import com.favourite.collections.service.AuthService;
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
@@ -38,16 +39,15 @@ public class AuthController {
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<CommandResult> register(@RequestBody @Valid RegistrationData registerData,
-												  ServletServerHttpRequest request) {
+	public ResponseEntity<CommandResult> register(@RequestBody @Valid RegistrationData registerData) {
 		if (!registerData.passwordsMatch()) {
 			throw new ConstraintValidationException("error.auth.passwords.do.not.match", "Passwords do not match");
 		}
-		return authService.register(registerData, request);
+		return authService.register(registerData);
 	}
 
 	@GetMapping("/verify-registration")
-	public ResponseEntity<CommandResult> verifyAccount(@RequestParam String token) {
+	public ResponseEntity<CommandResult> verifyAccount(@RequestParam @Parameter(name = "token") String token) {
 		return authService.verifyUserVerificationToken(token);
 	}
 

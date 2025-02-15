@@ -63,9 +63,10 @@ public class AuthServiceImpl implements AuthService {
 			if(user == null) {
 				throw new UsernameNotFoundException(loginData.getEmail());
 			}
-			if (!user.isEnabled())
+			if (!user.isEnabled()) {
 				throw new UsernameNotFoundException(
 						"error.user.not.verified.or.active: Check your email to be verified!");
+			}
 			if (!user.isAccountNonLocked()) {
 				throw new AbstractPlatformException("error.message.invalid.account",
 						"Please contact the administrator");
@@ -90,7 +91,7 @@ public class AuthServiceImpl implements AuthService {
 
 	@Override
 	@Transactional
-	public ResponseEntity<CommandResult> register(RegistrationData registerData, ServletServerHttpRequest request) {
+	public ResponseEntity<CommandResult> register(RegistrationData registerData) {
 
 		String email = registerData.getEmail();
 		String firstname = registerData.getFirstname();
@@ -111,7 +112,7 @@ public class AuthServiceImpl implements AuthService {
 
 		// todo: Create and add cart
 		AppUser newAppuser = AppUser.builder().email(email).firstname(firstname).lastname(lastname).phoneNo(phoneNumber)
-				//.password(passwordEncoder.encode(password))
+				.password(passwordEncoder.encode(password))
 				.role(role).build();
 
 		newAppuser = this.appUserRepository.save(newAppuser);
