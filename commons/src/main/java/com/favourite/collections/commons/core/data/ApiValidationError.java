@@ -12,13 +12,13 @@ import lombok.EqualsAndHashCode;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiValidationError extends ApiSubError {
-	private Object object;
+	private Object parameter;
 	private String field;
 	private Object rejectedValue;
 	private String message;
 
-	public ApiValidationError(Object object, String message) {
-		this.object = object;
+	public ApiValidationError(Object parameter, String message) {
+		this.parameter = parameter;
 		this.message = message;
 	}
 }

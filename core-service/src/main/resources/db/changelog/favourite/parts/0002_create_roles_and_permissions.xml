@@ -108,8 +108,8 @@
         <insert tableName="m_appuser">
             <column name="firstname" value="Favorite"/>
             <column name="lastname" value="Olly"/>
-            <column name="email" value="rbukunmi8@@gmail.com"/>
-            <column name="password" value="{SHA-256}{1}5787039480429368bf94732aacc771cd0a3ea02bcf504ffe1185ab94213bc63a"/>
+            <column name="email" value="rbukunmi8@gmail.com"/>
+            <column name="password" value="$2a$15$T70QZozZK3471usZz4iq2efUYQZUeL/RciOXCN6yEAg.MaTtte/du"/>
             <column name="phone_no" value="08143015906"/>
             <column name="is_active" value="true"/>
             <column name="is_verified" value="true"/>

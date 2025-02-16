@@ -18,21 +18,24 @@ import lombok.Setter;
 @Setter
 @Builder
 public class ProductRequestData {
-	@NotNull(message = "Name required") @NotBlank(message = "Name required")
+	@NotBlank(message = "Name required")
 	private String name;
 
-	@NotNull(message = "Unit price cannot be null") @Positive(message = "Value must be positive") private BigDecimal unitPrice;
+	@NotNull(message = "Unit price cannot be null")
+	@Positive(message = "Value must be positive")
+	private BigDecimal unitPrice;
 
 	private String imageUrl;
 
-	@Positive @NotNull(message = "Field required") @NotBlank(message = "Field required")
+	@Positive @NotNull(message = "Field required")
+	@NotBlank(message = "Field required")
 	private Integer availableQuantity;
 
 	private Long colorId;
 
-	@NotNull(message = "Description is required") @NotBlank(message = "Field is required")
+	@NotBlank(message = "Field is required")
 	private String description;
 
-	@NotNull(message = "Product must have a subcategory") @NotBlank(message = "Product must have a subcategory")
+	@NotBlank(message = "Product must have a subcategory")
 	private Long subcategoryId;
 }

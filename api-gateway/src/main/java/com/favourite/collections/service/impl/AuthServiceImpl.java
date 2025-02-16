@@ -1,11 +1,10 @@
 /* Collections #2024 */
 package com.favourite.collections.service.impl;
 
-import com.favourite.collections.commons.core.config.JwtUtil;
+import com.favourite.collections.commons.core.config.JwtConfig;
 import com.favourite.collections.commons.core.data.CommandResult;
 import com.favourite.collections.commons.core.data.CommandResultBuilder;
 import com.favourite.collections.commons.core.exceptions.AbstractPlatformException;
-import com.favourite.collections.commons.core.json.FromJsonHelper;
 import com.favourite.collections.commons.useradmin.data.ChangePasswordData;
 import com.favourite.collections.commons.useradmin.data.ForgotPasswordData;
 import com.favourite.collections.commons.useradmin.data.LoginData;
@@ -25,16 +24,16 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.BooleanUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -43,22 +42,22 @@ import java.time.temporal.ChronoUnit;
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
+
 	private final AppUserDetailsService userDetailsService;
 	private final ReactiveAuthenticationManager authenticationManager;
-	private final JwtUtil jwtUtil;
+	private final JwtConfig jwtConfig;
 	private final AppUserRepository appUserRepository;
 	private final RoleRepository roleRepository;
 	private final TokenRepository tokenRepository;
 	private final PasswordEncoder passwordEncoder;
 	private final AppContextUser appContextUser;
 	private final TokenGenerator tokenGenerator;
-	private final FromJsonHelper fromJsonHelper;
+
 
 	@Override
-	public ResponseEntity<CommandResult> loginUserIn(LoginData loginData) {
+	public Mono<ResponseEntity<CommandResult>> loginUserIn(LoginData loginData) {
 
 		try {
-
 			UserDetails user = userDetailsService.findByUsername(loginData.getEmail()).block();
 			if(user == null) {
 				throw new UsernameNotFoundException(loginData.getEmail());
@@ -72,20 +71,27 @@ public class AuthServiceImpl implements AuthService {
 						"Please contact the administrator");
 			}
 
-			Authentication authentication = authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(loginData.getEmail(), loginData.getPassword())).block();
-			if (authentication == null) {
-				throw new AbstractPlatformException("error.msg.invalid.email.or.password",
-						"Email or Password Invalid!");
-			} else {
-				String token = this.jwtUtil.generateToken(authentication);
-				return ResponseEntity.ok(new CommandResultBuilder().response("Login Successful").resourceId("200")
-						.token(token).build());
-			}
+			return authenticationManager.authenticate(
+					new UsernamePasswordAuthenticationToken(loginData.getEmail(), loginData.getPassword())).map(
+							authentication -> {
+							String token = this.jwtConfig.generateToken(authentication);
+							log.info("Generated token for login: {}", token);
+							return ResponseEntity.ok(new CommandResultBuilder().response("Login Successful")
+									.token(token).build());
+					}
+			).onErrorResume(err -> {
+				log.error(err.getMessage());
+				return Mono.just(ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+						.body(new CommandResultBuilder().response("Invalid credentials")
+						.build()));
+			});
+
 		} catch (BadCredentialsException e) {
-			throw new AbstractPlatformException("error.msg.auth.login", e.getMessage(), 401);
+			log.error("LogInUserError: {}", e.getMessage(), e);
+			throw new AbstractPlatformException("error.msg.auth.login", "Incorrect username or password", 401);
 		} catch (UsernameNotFoundException e) {
-			throw new AbstractPlatformException("error.msg.auth.login", e.getMessage(), 404);
+			log.info("User not found: {}", e.getMessage());
+			throw new AbstractPlatformException("error.msg.auth.login", "Incorrect username or password", 404);
 		}
 	}
 
@@ -117,12 +123,12 @@ public class AuthServiceImpl implements AuthService {
 
 		newAppuser = this.appUserRepository.save(newAppuser);
 
-		log.info("AppuserId: {}", newAppuser.getId());
+		log.info("AppUserId: {}", newAppuser.getId());
 		Token token = tokenGenerator.generateToken(5L, ChronoUnit.MINUTES, newAppuser.getId());
 		this.tokenRepository.save(token);
 
 		// todo: sendEmail To user
-
+		log.info("Token: {}", token);
 		return ResponseEntity.ok(new CommandResultBuilder().entityId(newAppuser.getId())
 				.response("Registration Successful").message("Check your email to get verified").build());
 	}
@@ -160,7 +166,7 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
-	public ResponseEntity<CommandResult> resendVerificationToken(String token, ServletServerHttpRequest request) {
+	public ResponseEntity<CommandResult> resendVerificationToken(String token) {
 		Token verificationToken = tokenRepository.findByToken(token)
 				.orElseThrow(() -> new AbstractPlatformException("error.auth.msg.token.not.found", "Token Not Found"));
 
@@ -209,8 +215,7 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
-	public ResponseEntity<CommandResult> getForgotPasswordToken(ForgotPasswordData forgotPasswordData,
-                                                                ServletServerHttpRequest request) {
+	public ResponseEntity<CommandResult> getForgotPasswordToken(ForgotPasswordData forgotPasswordData) {
 		AppUser appUser = appUserRepository.findByEmail(forgotPasswordData.getEmail())
 				.orElseThrow(() -> new UsernameNotFoundException("User Does Not Exist"));
 

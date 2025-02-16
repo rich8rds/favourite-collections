@@ -3,7 +3,7 @@ package com.favourite.collections.filter;
 
 import java.util.Objects;
 
-import com.favourite.collections.commons.core.config.JwtUtil;
+import com.favourite.collections.commons.core.config.JwtConfig;
 import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -22,7 +22,7 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class WebSecurityFilter implements WebFilter {
 	private final RouteValidator routeValidator;
-	private final JwtUtil jwtUtil;
+	private final JwtConfig jwtConfig;
 
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
@@ -44,7 +44,7 @@ public class WebSecurityFilter implements WebFilter {
 
 			String userEmail;
 			try {
-				userEmail = jwtUtil.extractUsername(authHeader);
+				userEmail = jwtConfig.extractUsername(authHeader);
 				log.info("signature: {}", userEmail);
 			} catch (Exception e) {
 				System.out.println("invalid access...!   " + e.getMessage());

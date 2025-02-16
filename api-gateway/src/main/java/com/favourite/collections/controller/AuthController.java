@@ -8,11 +8,9 @@ import com.favourite.collections.commons.useradmin.data.RegistrationData;
 import com.favourite.collections.commons.useradmin.data.UpdatePasswordData;
 import com.favourite.collections.commons.useradmin.exception.ConstraintValidationException;
 import com.favourite.collections.service.AuthService;
-import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Mono;
 
 import static com.favourite.collections.config.ApiConstants.AUTH_BASE_URL;
 
@@ -34,7 +33,7 @@ public class AuthController {
 	private final AuthService authService;
 
 	@PostMapping("/login")
-	public ResponseEntity<CommandResult> login(@RequestBody LoginData loginData) {
+	public Mono<ResponseEntity<CommandResult>> login(@RequestBody LoginData loginData) {
 		return authService.loginUserIn(loginData);
 	}
 
@@ -47,14 +46,13 @@ public class AuthController {
 	}
 
 	@GetMapping("/verify-registration")
-	public ResponseEntity<CommandResult> verifyAccount(@RequestParam @Parameter(name = "token") String token) {
+	public ResponseEntity<CommandResult> verifyAccount(@RequestParam(name = "token") String token) {
 		return authService.verifyUserVerificationToken(token);
 	}
 
 	@GetMapping("/resend-verification-token")
-	public ResponseEntity<CommandResult> resendVerificationToken(@RequestParam String token,
-																 ServletServerHttpRequest request) {
-		return authService.resendVerificationToken(token, request);
+	public ResponseEntity<CommandResult> resendVerificationToken(@RequestParam String token) {
+		return authService.resendVerificationToken(token);
 	}
 
 	@PostMapping("/update-password")
@@ -66,9 +64,8 @@ public class AuthController {
 	}
 
 	@PostMapping("/forgot-password")
-	public ResponseEntity<CommandResult> forgotPassword(@RequestBody ForgotPasswordData forgotPasswordData,
-														ServletServerHttpRequest request) {
-		return authService.getForgotPasswordToken(forgotPasswordData, request);
+	public ResponseEntity<CommandResult> forgotPassword(@RequestBody ForgotPasswordData forgotPasswordData) {
+		return authService.getForgotPasswordToken(forgotPasswordData);
 	}
 
 	@PostMapping("/change-password")

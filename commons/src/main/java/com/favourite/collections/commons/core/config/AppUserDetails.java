@@ -1,5 +1,5 @@
 /* Collections #2024 */
-package com.favourite.collections.config;
+package com.favourite.collections.commons.core.config;
 
 import java.util.Collection;
 import java.util.Set;

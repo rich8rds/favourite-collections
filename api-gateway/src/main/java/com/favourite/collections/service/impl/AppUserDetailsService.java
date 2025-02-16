@@ -3,7 +3,7 @@ package com.favourite.collections.service.impl;
 
 import com.favourite.collections.commons.useradmin.domain.AppUser;
 import com.favourite.collections.commons.useradmin.repository.AppUserRepository;
-import com.favourite.collections.config.AppUserDetails;
+import com.favourite.collections.commons.core.config.AppUserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;

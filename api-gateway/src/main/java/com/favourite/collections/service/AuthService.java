@@ -9,24 +9,21 @@ import com.favourite.collections.commons.useradmin.data.LoginData;
 import com.favourite.collections.commons.useradmin.data.RegistrationData;
 import com.favourite.collections.commons.useradmin.data.UpdatePasswordData;
 import org.springframework.http.ResponseEntity;
-
-
-import org.springframework.http.server.ServletServerHttpRequest;
+import reactor.core.publisher.Mono;
 
 public interface AuthService {
 
-	ResponseEntity<CommandResult> loginUserIn(LoginData loginData);
+	Mono<ResponseEntity<CommandResult>> loginUserIn(LoginData loginData);
 
 	ResponseEntity<CommandResult> register(RegistrationData registerData);
 
 	ResponseEntity<CommandResult> verifyUserVerificationToken(String token);
 
-	ResponseEntity<CommandResult> resendVerificationToken(String token, ServletServerHttpRequest request);
+	ResponseEntity<CommandResult> resendVerificationToken(String token);
 
 	ResponseEntity<CommandResult> updatePassword(UpdatePasswordData updatePasswordData);
 
-	ResponseEntity<CommandResult> getForgotPasswordToken(ForgotPasswordData forgotPasswordData,
-                                                         ServletServerHttpRequest request);
+	ResponseEntity<CommandResult> getForgotPasswordToken(ForgotPasswordData forgotPasswordData);
 
 	ResponseEntity<CommandResult> changePasswordWithToken(String token, ChangePasswordData changePasswordData);
 }
