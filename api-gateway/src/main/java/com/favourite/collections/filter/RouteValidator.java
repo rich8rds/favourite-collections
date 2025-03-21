@@ -32,6 +32,8 @@ public class RouteValidator {
 		openApiEndpoints.put("/api/v1/notification/**", List.of(ALL.name()));
 		openApiEndpoints.put("/v2/api-docs", List.of(ALL.name()));
 		openApiEndpoints.put("/v3/api-docs", List.of(ALL.name()));
+		openApiEndpoints.put("/notification-service/v3/api-docs", List.of(ALL.name()));
+		openApiEndpoints.put("/core-service/v3/api-docs", List.of(ALL.name()));
 		openApiEndpoints.put("/configuration", List.of(ALL.name()));
 		openApiEndpoints.put("/swagger/**", List.of(ALL.name()));
 		openApiEndpoints.put("/swagger-ui/**", List.of(ALL.name()));

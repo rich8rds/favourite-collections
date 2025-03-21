@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.favourite.collections.commons.useradmin.exception.ConstraintValidationException;
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanInstantiationException;
 import org.springframework.http.HttpStatus;
@@ -94,6 +95,17 @@ public class GlobalExceptionHandler extends ResponseStatusExceptionHandler {
 
 		ApiError errorResponse = ApiError.builder().message(ex.getMessage())
 				.globalMessageCode("Error instantiating bean").debugMessage(ex.getLocalizedMessage())
+				.build();
+
+		return ResponseEntity.badRequest().body(errorResponse);
+	}
+
+	@ExceptionHandler(ExpiredJwtException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ResponseEntity<ApiError> usernameNotFoundException(ExpiredJwtException ex) {
+
+		ApiError errorResponse = ApiError.builder().message(ex.getMessage())
+				.globalMessageCode("JWT has expired").debugMessage(ex.getLocalizedMessage())
 				.build();
 
 		return ResponseEntity.badRequest().body(errorResponse);

@@ -22,9 +22,10 @@ public final class ApiError {
 	private final HttpStatus status;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
-	private final LocalDateTime timestamp = LocalDateTime.now();
+	private final String timestamp = LocalDateTime.now().toString();
 
 	private final String message;
+	private final String path;
 	private final String globalMessageCode;
 	private final String debugMessage;
 	private final Collection<ApiSubError> subErrors;
@@ -35,5 +36,8 @@ public final class ApiError {
 		this.globalMessageCode = null;
 		this.debugMessage = null;
 		this.status = HttpStatus.BAD_REQUEST;
+		this.path = null;
 	}
+
+
 }

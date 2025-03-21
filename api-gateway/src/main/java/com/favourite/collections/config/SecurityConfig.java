@@ -36,7 +36,8 @@ public class SecurityConfig {
 						.pathMatchers(routeValidator.openApiEndpoints.keySet()
 								.toArray(String[]::new)).permitAll()
 						.anyExchange().authenticated())
-		 .addFilterAt(webSecurityFilter, SecurityWebFiltersOrder.AUTHORIZATION);
+				.exceptionHandling(handler -> handler.authenticationEntryPoint(new AuthEntryPoint()))
+				.addFilterAt(webSecurityFilter, SecurityWebFiltersOrder.AUTHORIZATION);
 
 		return http.build();
 	}
